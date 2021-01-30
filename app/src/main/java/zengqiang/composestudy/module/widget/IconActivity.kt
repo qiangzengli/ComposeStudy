@@ -1,11 +1,10 @@
-package zengqiang.composestudy.module.ui
+package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Colors
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
@@ -41,7 +40,6 @@ class IconActivity : ComponentActivity() {
                 Icon(Icons.Default.DateRange)
                 Divider(thickness = 10.dp, color = Color.Transparent)
                 Icon(Icons.Outlined.Face,tint = Color.Unspecified)
-
 
             }
         })

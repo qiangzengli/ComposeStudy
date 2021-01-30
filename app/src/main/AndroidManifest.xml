@@ -19,14 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.ui.TextActivity" />
-        <activity android:name=".module.UiActivity" />
-        <activity android:name=".module.ui.ButtonActivity" />
-        <activity android:name=".module.ui.OutLineButtonActivity" />
-        <activity android:name=".module.ui.TextButtonActivity" />
-        <activity android:name=".module.ui.TextFieldActivity" />
-        <activity android:name=".module.ui.OutlinedTextFieldActivity" />
-        <activity android:name=".module.ui.IconActivity" />
+        <activity android:name=".module.widget.TextActivity" />
+        <activity android:name=".module.WidgetActivity" />
+        <activity android:name=".module.widget.ButtonActivity" />
+        <activity android:name=".module.widget.OutLineButtonActivity" />
+        <activity android:name=".module.widget.TextButtonActivity" />
+        <activity android:name=".module.widget.TextFieldActivity" />
+        <activity android:name=".module.widget.OutlinedTextFieldActivity" />
+        <activity android:name=".module.widget.IconActivity" />
+        <activity android:name=".module.widget.ImageActivity" />
+        <activity android:name=".module.widget.IconToggleButtonActivity" />
+        <activity android:name=".module.widget.SwitchActivity" />
+        <activity android:name=".module.widget.RadioButtonActivity" />
+        <activity android:name=".module.widget.TopAppBarActivity" />
+        <activity android:name=".module.widget.TabRowActivity" />
     </application>
 
 </manifest>

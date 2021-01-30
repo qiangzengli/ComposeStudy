@@ -1,4 +1,4 @@
-package zengqiang.composestudy.module.ui
+package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -100,6 +101,7 @@ class TextActivity : ComponentActivity() {
             modifier = Modifier
                 .padding(10.dp)
                 .fillMaxWidth()
+                .height(100.dp)
                 .background(color = Color.Red)
                 .alpha(1f)
                 .clickable(onClick = {
@@ -118,6 +120,7 @@ class TextActivity : ComponentActivity() {
 
             },//计算完成回调
 
+            overflow = TextOverflow.Ellipsis
 
         )
 

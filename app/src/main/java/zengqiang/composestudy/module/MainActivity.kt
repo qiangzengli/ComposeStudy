@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                             "Ui" -> startActivity(
                                 Intent(
                                     this@MainActivity,
-                                    UiActivity::class.java
+                                    WidgetActivity::class.java
                                 )
                             )
                         }

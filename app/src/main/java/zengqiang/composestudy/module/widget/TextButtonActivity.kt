@@ -1,4 +1,4 @@
-package zengqiang.composestudy.module.ui
+package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
