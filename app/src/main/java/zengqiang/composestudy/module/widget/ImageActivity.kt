@@ -108,31 +108,6 @@ class ImageActivity : ComponentActivity() {
             )
         }
 
-//
-//
-//        loadImageResource(id = R.drawable.a).resource.resource?.apply {
-//            Image(
-//
-//                this,
-//                modifier = Modifier
-//                    .clip(
-//                        shape =
-////                            RoundedCornerShape(50)
-//                        CutCornerShape(20)
-//
-//                    )
-//                    .border(
-//                        width = 2.dp, color = Color.Yellow,
-//                        shape =
-////                            RoundedCornerShape(50)
-//                        CutCornerShape(20)
-//                    )
-//                    .width(100.dp)
-//                    .height(100.dp),
-//                contentScale = ContentScale.Crop
-//            )
-//        }
-
 
     }
 }
