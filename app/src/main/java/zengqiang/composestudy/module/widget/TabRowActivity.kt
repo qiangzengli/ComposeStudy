@@ -2,6 +2,7 @@ package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
 
 /**
@@ -77,7 +77,7 @@ class TabRowActivity : ComponentActivity() {
                                 ) {
                                     Text(text = title)
                                     Spacer(modifier = Modifier.width(10.dp))
-                                    Icon(Icons.Filled.AccountCircle)
+                                    Icon(Icons.Filled.AccountCircle,contentDescription = null)
 
 
                                 }

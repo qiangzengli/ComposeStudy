@@ -2,6 +2,7 @@ package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -10,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import zengqiang.composestudy.extension.toast
@@ -110,7 +112,7 @@ class TextActivity : ComponentActivity() {
             fontSize = 20.sp,//字体大小
             fontFamily = FontFamily.SansSerif,//修改字体
             fontWeight = FontWeight.Medium,//修改字重（字体粗细）
-            letterSpacing = TextUnit.Sp(10),//字符间距
+//            letterSpacing = TextUnit.Sp(10),//字符间距
 
             textAlign = TextAlign.Justify,//Justify 拉伸填充整个容器， Start Left 左对齐  End  Right 右对齐
             maxLines = 10,//最大行数

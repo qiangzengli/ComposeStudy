@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import zengqiang.composestudy.module.widget.*
 import zengqiang.composestudy.widget.TextItem
 
@@ -15,31 +15,29 @@ Author:alan
 Desc:
  */
 class WidgetActivity : ComponentActivity() {
+    private val data:ArrayList<String> = arrayListOf(
+        "Text",
+        "Button",
+        "OutlinedButton",
+        "TextButton",
+        "TextField",
+        "OutlinedTextField",
+        "Icon",
+        "Image",
+        "IconToggleButton",
+        "Switch_And_CheckBox",
+        "RadioButton",
+        "TopAppBar",
+        "TabRow"
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             LazyColumn {
-                items(
-                    listOf(
-                        "Text",
-                        "Button",
-                        "OutlinedButton",
-                        "TextButton",
-                        "TextField",
-                        "OutlinedTextField",
-                        "Icon",
-                        "Image",
-                        "IconToggleButton",
-                        "Switch_And_CheckBox",
-                        "RadioButton",
-                        "TopAppBar",
-                        "TabRow"
-                    )
-                ) {
-                    TextItem(
-                        msg = it
-                    ) {
-                        when (it) {
+                items(data.size,itemContent ={
+                    TextItem(msg = data[it]) {
+                        when (data[it]) {
                             "Text" -> startActivity(
                                 Intent(
                                     this@WidgetActivity,
@@ -59,8 +57,10 @@ class WidgetActivity : ComponentActivity() {
                                 )
                             )
                             "TextButton" -> startActivity(
-                                Intent(this@WidgetActivity,
-                                    TextButtonActivity::class.java)
+                                Intent(
+                                    this@WidgetActivity,
+                                    TextButtonActivity::class.java
+                                )
                             )
                             "TextField" -> startActivity(
                                 Intent(
@@ -118,7 +118,8 @@ class WidgetActivity : ComponentActivity() {
                             )
                         }
                     }
-                }
+
+                })
 
             }
         }
