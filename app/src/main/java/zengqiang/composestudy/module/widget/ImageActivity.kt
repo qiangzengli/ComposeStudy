@@ -2,6 +2,34 @@ package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import zengqiang.composestudy.R
+import zengqiang.composestudy.ui.purple700
 
 
 /**
@@ -10,79 +38,101 @@ Author:alan
 Desc:
  */
 class ImageActivity : ComponentActivity() {
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContent { ShowImage() }
+        setContent { ShowImage() }
     }
+
+    //
+    @ExperimentalFoundationApi
+    @Preview
+    @Composable
+    fun ShowImage() {
+        LazyColumn() {
+            items(10, itemContent = {
+                item()
+            })
+            stickyHeader {
+                TopAppBar(
+                    title = { Text(text = "标题") },
+                    navigationIcon = {
+                        IconButton(onClick = { finish() }) {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = null)
+
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = {}) {
+                            Icon(Icons.Filled.Share, contentDescription = null)
+
+                        }
+                        IconButton(onClick = {}) {
+                            Icon(Icons.Filled.MoreVert, contentDescription = null)
+                        }
+                    }
+                )
+
+            }
+            items(200, itemContent = {
+                item()
+            })
+
+
+        }
+    }
+
+
+    @Composable
+    fun item() {
+        Column() {
+
+            Image(
+                painter = painterResource(id = R.drawable.a),
+                null,
+                alpha = 0.32f,
+                alignment = Alignment.BottomEnd,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.clickable(onClick = {
+
+                })
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.a),
+                null,
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .fillMaxWidth(),
+                contentScale = ContentScale.Fit
+            )
+        }
+
 //
-//    @Preview
-//    @Composable
-//    fun ShowImage() {
-//        ScrollableColumn(
-//            modifier = Modifier
-//                .padding(10.dp)
-//                .fillMaxWidth()
 //
+//        loadImageResource(id = R.drawable.a).resource.resource?.apply {
+//            Image(
 //
-//        ) {
-//
-//            loadImageResource(id = R.drawable.a).resource.resource?.apply {
-//                Image(
-//                    this,
-//                    alpha = 0.32f,
-//                    alignment = Alignment.BottomEnd,
-//                    contentScale = ContentScale.Crop,
-//                    modifier = Modifier.clickable(onClick = {
-//
-//                    })
-//                )
-//            }
-//
-//            loadImageResource(id = R.drawable.a).resource.resource?.apply {
-//                Image(
-//                    this,
-//                    modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
-//                        .fillMaxWidth(),
-//                    contentScale = ContentScale.Fit
-//                )
-//            }
-//
-//            loadImageResource(id = R.drawable.a).resource.resource?.apply {
-//                Image(
-//
-//                    this,
-//                    modifier = Modifier
-//                        .clip(
-//                            shape =
+//                this,
+//                modifier = Modifier
+//                    .clip(
+//                        shape =
 ////                            RoundedCornerShape(50)
-//                            CutCornerShape(20)
+//                        CutCornerShape(20)
 //
-//                        )
-//                        .border(
-//                            width = 2.dp, color = Color.Yellow,
-//                            shape =
+//                    )
+//                    .border(
+//                        width = 2.dp, color = Color.Yellow,
+//                        shape =
 ////                            RoundedCornerShape(50)
-//                            CutCornerShape(20)
-//                        )
-//                        .width(100.dp)
-//                        .height(100.dp),
-//                    contentScale = ContentScale.Crop
-//                )
-//            }
-//
-//                (id = R.drawable.a).resource.resource?.apply {
-//                Image(this,null)
-//            }
-//
-//            loadImageResource(id = R.drawable.a).resource.resource?.apply {
-//                Image(this)
-//            }
-//
-//            loadImageResource(id = R.drawable.a).resource.resource?.apply {
-//                Image(this)
-//            }
-//
-//
+//                        CutCornerShape(20)
+//                    )
+//                    .width(100.dp)
+//                    .height(100.dp),
+//                contentScale = ContentScale.Crop
+//            )
 //        }
-//    }
+
+
+    }
 }
