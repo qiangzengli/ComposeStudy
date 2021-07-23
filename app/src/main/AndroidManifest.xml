@@ -34,6 +34,9 @@
         <activity android:name=".module.widget.RadioButtonActivity" />
         <activity android:name=".module.widget.TopAppBarActivity" />
         <activity android:name=".module.widget.TabRowActivity" />
+        <activity android:name=".module.LayoutActivity" />
+        <activity android:name=".module.layout.ConstraintLayoutActivity" />
+        <activity android:name=".module.layout.RowActivity" />
     </application>
 
 </manifest>

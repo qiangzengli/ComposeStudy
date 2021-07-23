@@ -15,7 +15,7 @@ Author:alan
 Desc:
  */
 class WidgetActivity : ComponentActivity() {
-    private val data:ArrayList<String> = arrayListOf(
+    private val data: ArrayList<String> = arrayListOf(
         "Text",
         "Button",
         "OutlinedButton",
@@ -28,14 +28,15 @@ class WidgetActivity : ComponentActivity() {
         "Switch_And_CheckBox",
         "RadioButton",
         "TopAppBar",
-        "TabRow"
+        "TabRow",
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             LazyColumn {
-                items(data.size,itemContent ={
+                items(data.size, itemContent = {
                     TextItem(msg = data[it]) {
                         when (data[it]) {
                             "Text" -> startActivity(
@@ -116,6 +117,7 @@ class WidgetActivity : ComponentActivity() {
                                     TabRowActivity::class.java
                                 )
                             )
+
                         }
                     }
 
