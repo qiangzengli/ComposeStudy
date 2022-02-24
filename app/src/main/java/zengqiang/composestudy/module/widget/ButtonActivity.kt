@@ -2,17 +2,18 @@ package zengqiang.composestudy.module.widget
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.dp
 import zengqiang.composestudy.extension.toast
 
@@ -35,7 +36,8 @@ class ButtonActivity : ComponentActivity() {
             onClick = {
                 toast(ButtonActivity::class.java.simpleName)
             },//点击事件
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier
+                .padding(10.dp)
                 .fillMaxWidth()
                 .background(Color.Transparent),//修饰
             border =

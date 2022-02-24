@@ -3,9 +3,9 @@ package zengqiang.composestudy.module
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.lazy.LazyColumn
 import zengqiang.composestudy.module.widget.*
 import zengqiang.composestudy.widget.TextItem
 
@@ -31,6 +31,7 @@ class WidgetActivity : ComponentActivity() {
         "TabRow",
     )
 
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

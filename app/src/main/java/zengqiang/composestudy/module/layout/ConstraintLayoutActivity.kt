@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 
 class ConstraintLayoutActivity : ComponentActivity() {
@@ -43,8 +42,6 @@ class ConstraintLayoutActivity : ComponentActivity() {
 //                    top.linkTo(button.bottom, margin = 16.dp)
 //                })
             }
-
-
         }
 
     }

@@ -37,8 +37,8 @@ Time: 2021-01-31 上午12:31
 Author:alan
 Desc:
  */
+@ExperimentalFoundationApi
 class ImageActivity : ComponentActivity() {
-    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent { ShowImage() }
@@ -51,7 +51,7 @@ class ImageActivity : ComponentActivity() {
     fun ShowImage() {
         LazyColumn() {
             items(10, itemContent = {
-                item()
+                Item()
             })
             stickyHeader {
                 TopAppBar(
@@ -75,7 +75,7 @@ class ImageActivity : ComponentActivity() {
 
             }
             items(200, itemContent = {
-                item()
+                Item()
             })
 
 
@@ -84,7 +84,7 @@ class ImageActivity : ComponentActivity() {
 
 
     @Composable
-    fun item() {
+    fun Item() {
         Column() {
 
             Image(

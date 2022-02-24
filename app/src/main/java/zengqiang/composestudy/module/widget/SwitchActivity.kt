@@ -25,7 +25,6 @@ class SwitchActivity : ComponentActivity() {
                 ShowSwitch()
                 Divider(thickness = 100.dp)
                 ShowCheckBox()
-
             }
         }
     }
