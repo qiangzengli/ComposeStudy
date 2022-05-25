@@ -12,12 +12,12 @@
         <activity
             android:exported="true"
             android:name=".module.MainActivity"
-            android:label="@string/app_name"
             android:theme="@style/Theme.ComposeStudy.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                
             </intent-filter>
         </activity>
         <activity android:name=".module.widget.TextActivity" />
@@ -37,6 +37,7 @@
         <activity android:name=".module.LayoutActivity" />
         <activity android:name=".module.layout.ConstraintLayoutActivity" />
         <activity android:name=".module.layout.RowActivity" />
+        <activity android:name=".module.AnimationActivity" />
     </application>
 
 </manifest>

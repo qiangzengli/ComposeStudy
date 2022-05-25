@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.ui.tooling.preview.Preview
 import zengqiang.composestudy.widget.TextItem
 
 class MainActivity : ComponentActivity() {
@@ -29,6 +27,12 @@ class MainActivity : ComponentActivity() {
                                 Intent(
                                     this@MainActivity,
                                     WidgetActivity::class.java
+                                )
+                            )
+                            "Animation" -> startActivity(
+                                Intent(
+                                    this@MainActivity,
+                                    AnimationActivity::class.java
                                 )
                             )
                             "Layout" -> startActivity(
