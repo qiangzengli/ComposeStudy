@@ -36,6 +36,8 @@
         <activity android:name=".module.layout.ConstraintLayoutActivity" />
         <activity android:name=".module.layout.RowActivity" />
         <activity android:name=".module.AnimationActivity" />
+        <activity android:name=".module.animator.AnimatedVisibilityActivity" />
+        <activity android:name=".module.animator.AnimatedContentActivity" />
     </application>
 
 </manifest>
