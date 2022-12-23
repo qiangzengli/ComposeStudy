@@ -1,6 +1,5 @@
 package zengqiang.composestudy.module
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,7 +18,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             ComposeNavHost(
                 navController = navController,
-                startDestination = Routes.home.name
+                startDestination = Routes.HOME.name
             )
         }
     }
@@ -29,20 +28,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HomePage(navController: NavHostController) {
     val data = listOf(
-        "Ui",
-        "Animation",
-        "Layout"
+        Routes.WIDGETS.name,
+        Routes.ANIMATION.name,
+        Routes.LAYOUT.name
     )
     LazyColumn {
         items(data.size, itemContent = {
-            TextItem(
-                msg = data[it]
-            ) {
-                when (data[it]) {
-                    "Ui" -> navController.navigate(Routes.widgets.name)
-                    "Animation" -> navController.navigate(Routes.animation.name)
-                    "Layout" -> navController.navigate(Routes.layout.name)
-                }
+            TextItem(msg = data[it]) {
+                navController.navigate(data[it])
             }
 
         })

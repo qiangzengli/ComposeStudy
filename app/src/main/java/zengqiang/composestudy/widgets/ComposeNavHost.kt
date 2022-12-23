@@ -1,8 +1,6 @@
 package zengqiang.composestudy.widgets
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -20,35 +18,36 @@ import zengqiang.composestudy.module.layout.RowPage
 import zengqiang.composestudy.module.widget.*
 
 enum class Routes {
-    home,
-    widgets,
-    layout,
-    animation,
+    // 根页面
+    HOME,
+    WIDGETS,
+    LAYOUT,
+    ANIMATION,
 
-    // widgets
-    button,
-    icon,
-    icon_toggle_button,
-    image,
-    outline_button,
-    outlined_text_field,
-    radio_button,
-    switch,
-    tab_row,
-    text,
-    text_button,
-    text_field,
-    top_appbar,
+    // WIDGETS
+    BUTTON,
+    ICON,
+    ICON_TOGGLE_BUTTON,
+    IMAGE,
+    OUTLINE_BUTTON,
+    OUTLINED_TEXT_FIELD,
+    RADIO_BUTTON,
+    SWITCH,
+    TAB_ROW,
+    TEXT,
+    TEXT_BUTTON,
+    TEXT_FIELD,
+    TOP_APPBAR,
 
-    // layout
-    constraint_layout,
-    row,
+    // LAYOUT
+    CONSTRAINT_LAYOUT,
+    ROW,
 
-    // animators
-    animated_content,
-    animated_visibility,
-    cross_fade,
-    remember_infinite_transition,
+    // ANIMATORS
+    ANIMATED_CONTENT,
+    ANIMATED_VISIBILITY,
+    CROSS_FADE,
+    REMEMBER_INFINITE_TRANSITION,
 
 
 }
@@ -57,84 +56,88 @@ enum class Routes {
 @Composable
 fun ComposeNavHost(navController: NavHostController, startDestination: String) {
     NavHost(navController = navController, startDestination = startDestination) {
-        composable(Routes.home.name) {
+        // 一级页面
+        composable(Routes.HOME.name) {
             HomePage(navController = navController)
         }
-        composable(Routes.widgets.name) {
+        composable(Routes.WIDGETS.name) {
             WidgetPage(navController = navController)
         }
-        composable(Routes.layout.name) {
+        composable(Routes.LAYOUT.name) {
             LayoutPage(navController = navController)
         }
-        composable(Routes.animation.name) {
+        composable(Routes.ANIMATION.name) {
             AnimationPage(navController = navController)
         }
-        composable(Routes.button.name) {
+        // Widgets 页面
+        composable(Routes.BUTTON.name) {
             ButtonPage(navController = navController)
         }
-        composable(Routes.icon.name) {
+        composable(Routes.ICON.name) {
             IconPage(navController = navController)
         }
 
-        composable(Routes.icon_toggle_button.name) {
+        composable(Routes.ICON_TOGGLE_BUTTON.name) {
             IconToggleButtonPage()
         }
 
-        composable(Routes.image.name) {
+        composable(Routes.IMAGE.name) {
             ImagePage(navController = navController)
         }
-        composable(Routes.outline_button.name) {
+        composable(Routes.OUTLINE_BUTTON.name) {
             OutLineButtonPage()
         }
-        composable(Routes.outlined_text_field.name) {
+        composable(Routes.OUTLINED_TEXT_FIELD.name) {
             OutlinedTextFieldPage()
         }
-        composable(Routes.radio_button.name) {
+        composable(Routes.RADIO_BUTTON.name) {
             RadioButtonPage()
         }
-        composable(Routes.switch.name) {
+        composable(Routes.SWITCH.name) {
             SwitchPage()
         }
 
-        composable(Routes.tab_row.name) {
+        composable(Routes.TAB_ROW.name) {
             TabRowPage()
         }
 
-        composable(Routes.text.name) {
+        composable(Routes.TEXT.name) {
             TextPage()
         }
 
-        composable(Routes.text_button.name) {
+        composable(Routes.TEXT_BUTTON.name) {
             TextButtonPage()
         }
-        composable(Routes.text_field.name) {
+        composable(Routes.TEXT_FIELD.name) {
             TextFieldPage()
         }
-        composable(Routes.text.name) {
+        composable(Routes.TEXT.name) {
             TextPage()
         }
-        composable(Routes.top_appbar.name) {
+        composable(Routes.TOP_APPBAR.name) {
             TopAppBarPage(navController)
         }
 
-        composable(Routes.constraint_layout.name) {
+        // Layout 页面
+        composable(Routes.CONSTRAINT_LAYOUT.name) {
             ConstraintLayoutPage()
         }
 
-        composable(Routes.row.name) {
+        composable(Routes.ROW.name) {
             RowPage()
         }
-        composable(Routes.animated_content.name) {
+        // Animations 页面
+        composable(Routes.ANIMATED_CONTENT.name) {
             AnimatedContentPage()
         }
-        composable(Routes.animated_visibility.name) {
+        composable(Routes.ANIMATED_VISIBILITY.name) {
             AnimatedVisibilityPage()
         }
 
-        composable(Routes.cross_fade.name) {
+        composable(Routes.CROSS_FADE.name) {
             CrossFadePage()
         }
-        composable(Routes.remember_infinite_transition.name) {
+        composable(Routes.REMEMBER_INFINITE_TRANSITION.name) {
             RememberInfiniteTransitionPage()
         }
 

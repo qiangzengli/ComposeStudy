@@ -16,40 +16,25 @@ Desc:
 @Composable
 fun WidgetPage(navController: NavHostController) {
     val data: ArrayList<String> = arrayListOf(
-        "Text",
-        "Button",
-        "OutlinedButton",
-        "TextButton",
-        "TextField",
-        "OutlinedTextField",
-        "Icon",
-        "Image",
-        "IconToggleButton",
-        "Switch_And_CheckBox",
-        "RadioButton",
-        "TopAppBar",
-        "TabRow",
+        Routes.TEXT.name,
+        Routes.BUTTON.name,
+        Routes.OUTLINE_BUTTON.name,
+        Routes.TEXT_BUTTON.name,
+        Routes.TEXT_FIELD.name,
+        Routes.OUTLINED_TEXT_FIELD.name,
+        Routes.ICON.name,
+        Routes.IMAGE.name,
+        Routes.ICON_TOGGLE_BUTTON.name,
+        Routes.SWITCH.name,
+        Routes.RADIO_BUTTON.name,
+        Routes.TOP_APPBAR.name,
+        Routes.TAB_ROW.name
     )
 
     LazyColumn {
         items(data.size, itemContent = {
             TextItem(msg = data[it]) {
-                when (data[it]) {
-                    "Text" -> navController.navigate(Routes.text.name)
-                    "Button" -> navController.navigate(Routes.button.name)
-                    "OutlinedButton" -> navController.navigate(Routes.outline_button.name)
-                    "TextButton" -> navController.navigate(Routes.text_button.name)
-                    "TextField" -> navController.navigate(Routes.text_field.name)
-                    "OutlinedTextField" -> navController.navigate(Routes.outlined_text_field.name)
-                    "Icon" -> navController.navigate(Routes.icon.name)
-                    "Image" -> navController.navigate(Routes.image.name)
-                    "IconToggleButton" -> navController.navigate(Routes.icon_toggle_button.name)
-                    "Switch_And_CheckBox" -> navController.navigate(Routes.switch.name)
-                    "RadioButton" -> navController.navigate(Routes.radio_button.name)
-                    "TopAppBar" -> navController.navigate(Routes.top_appbar.name)
-                    "TabRow" -> navController.navigate(Routes.tab_row.name)
-
-                }
+                navController.navigate(data[it])
             }
 
         })
