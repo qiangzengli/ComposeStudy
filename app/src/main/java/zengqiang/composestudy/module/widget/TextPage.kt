@@ -1,8 +1,5 @@
 package zengqiang.composestudy.module.widget
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.activity.compose.setContent
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -21,11 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import zengqiang.composestudy.extension.toast
 
 /**
 Time: 2021-01-30 下午4:14
@@ -68,63 +61,54 @@ onTextLayout: (TextLayoutResult) -> Unit = {}
 style: TextStyle = AmbientTextStyle.current
 文本的样式配置，例如颜色，字体，行高等。也就是说上面属性中的color,fontSize等一些属性也可以在这里进行声明。具体包含的属性可以参考TextStyle类。
  */
-class TextActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ShowText()
-        }
-    }
-
-    @Composable
-    fun ShowText() {
-        Text(
-            fontStyle = FontStyle.Italic,//设置字体 Normal 是正常，Italic 斜体
-            text = AnnotatedString.Builder("I Love Renxiangqin").run {
-                pushStyle(
-                    SpanStyle(
-                        color = Color.Blue,
-                        fontSize = 30.sp,
-                        fontStyle = FontStyle.Italic,
-                        fontFamily = FontFamily.Cursive
-                    )
+@Composable
+fun TextPage() {
+    Text(
+        fontStyle = FontStyle.Italic,//设置字体 Normal 是正常，Italic 斜体
+        text = AnnotatedString.Builder("I Love Renxiangqin").run {
+            pushStyle(
+                SpanStyle(
+                    color = Color.Blue,
+                    fontSize = 30.sp,
+                    fontStyle = FontStyle.Italic,
+                    fontFamily = FontFamily.Cursive
                 )
-                append("【可以】")
-                pop()//取消上面修改的样式对下文本的影响
-                append("I Love Renxiangqin")
-                append("I Love Renxiangqin")
-                append("I Love Renxiangqin")
-                append("I Love Renxiangqin")
-                append("I Love Renxiangqin")
-                append("I Love Renxiangqin")
-                toAnnotatedString()
-            }, //显示的内容
-            color = Color.Yellow,   //text颜色
-            modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth()
-                .height(100.dp)
-                .background(color = Color.Red)
-                .alpha(1f)
-                .clickable(onClick = {
-                    toast("hello")
-                }),
-            fontSize = 20.sp,//字体大小
-            fontFamily = FontFamily.SansSerif,//修改字体
-            fontWeight = FontWeight.Medium,//修改字重（字体粗细）
+            )
+            append("【可以】")
+            pop()//取消上面修改的样式对下文本的影响
+            append("I Love Renxiangqin")
+            append("I Love Renxiangqin")
+            append("I Love Renxiangqin")
+            append("I Love Renxiangqin")
+            append("I Love Renxiangqin")
+            append("I Love Renxiangqin")
+            toAnnotatedString()
+        }, //显示的内容
+        color = Color.Yellow,   //text颜色
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            .background(color = Color.Red)
+            .alpha(1f)
+            .clickable(onClick = {
+            }),
+        fontSize = 20.sp,//字体大小
+        fontFamily = FontFamily.SansSerif,//修改字体
+        fontWeight = FontWeight.Medium,//修改字重（字体粗细）
 //            letterSpacing = TextUnit.Sp(10),//字符间距
 
-            textAlign = TextAlign.Justify,//Justify 拉伸填充整个容器， Start Left 左对齐  End  Right 右对齐
-            maxLines = 10,//最大行数
-            textDecoration = TextDecoration.Underline,//LineThrough 中间划线 Underline 下划线
-            style = TextStyle.Default,//text样式
-            onTextLayout = {
+        textAlign = TextAlign.Justify,//Justify 拉伸填充整个容器， Start Left 左对齐  End  Right 右对齐
+        maxLines = 10,//最大行数
+        textDecoration = TextDecoration.Underline,//LineThrough 中间划线 Underline 下划线
+        style = TextStyle.Default,//text样式
+        onTextLayout = {
 
-            },//计算完成回调
+        },//计算完成回调
 
-            overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis
 
-        )
+    )
 
-    }
+
 }

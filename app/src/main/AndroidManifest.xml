@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.widget.TextActivity" />
-        <activity android:name=".module.WidgetActivity" />
+        <activity android:name=".module.WidgetPage" />
         <activity android:name=".module.widget.ButtonActivity" />
         <activity android:name=".module.widget.OutLineButtonActivity" />
         <activity android:name=".module.widget.TextButtonActivity" />
-        <activity android:name=".module.widget.TextFieldActivity" />
+        <activity android:name=".module.widget.TextFieldPage" />
         <activity android:name=".module.widget.OutlinedTextFieldActivity" />
         <activity android:name=".module.widget.IconActivity" />
         <activity android:name=".module.widget.ImageActivity" />
@@ -32,10 +32,10 @@
         <activity android:name=".module.widget.RadioButtonActivity" />
         <activity android:name=".module.widget.TopAppBarActivity" />
         <activity android:name=".module.widget.TabRowActivity" />
-        <activity android:name=".module.LayoutActivity" />
+        <activity android:name=".module.LayoutPage" />
         <activity android:name=".module.layout.ConstraintLayoutActivity" />
         <activity android:name=".module.layout.RowActivity" />
-        <activity android:name=".module.AnimationActivity" />
+        <activity android:name=".module.AnimationPage" />
         <activity android:name=".module.animator.AnimatedVisibilityActivity" />
         <activity android:name=".module.animator.AnimatedContentActivity" />
     </application>
