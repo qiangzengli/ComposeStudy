@@ -43,6 +43,9 @@ enum class Routes {
     SELECTION_CONTAINER,
     TRI_STATE_CHECKBOX,
     SLIDER,
+    DIALOG,
+    ALERT_DIALOG,
+    PROGRESS_BAR,
 
     // LAYOUT
     CONSTRAINT_LAYOUT,
@@ -134,6 +137,16 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         }
         composable(Routes.SLIDER.name) {
             SliderPage()
+        }
+        composable(Routes.DIALOG.name) {
+            DialogPage()
+        }
+        composable(Routes.ALERT_DIALOG.name) {
+            AlertDialogPage()
+        }
+
+        composable(Routes.PROGRESS_BAR.name){
+            ProgressBarPage()
         }
 
 
