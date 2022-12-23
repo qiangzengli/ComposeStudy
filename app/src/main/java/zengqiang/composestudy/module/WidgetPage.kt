@@ -1,10 +1,8 @@
 package zengqiang.composestudy.module
 
-import android.content.Intent
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import zengqiang.composestudy.module.widget.*
 import zengqiang.composestudy.widget.TextItem
 import zengqiang.composestudy.widgets.Routes
 
@@ -28,7 +26,8 @@ fun WidgetPage(navController: NavHostController) {
         Routes.SWITCH.name,
         Routes.RADIO_BUTTON.name,
         Routes.TOP_APPBAR.name,
-        Routes.TAB_ROW.name
+        Routes.TAB_ROW.name,
+        Routes.SELECTION_CONTAINER.name,
     )
 
     LazyColumn {
@@ -36,10 +35,6 @@ fun WidgetPage(navController: NavHostController) {
             TextItem(msg = data[it]) {
                 navController.navigate(data[it])
             }
-
         })
-
     }
-
-
 }

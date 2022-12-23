@@ -38,6 +38,7 @@ enum class Routes {
     TEXT_BUTTON,
     TEXT_FIELD,
     TOP_APPBAR,
+    SELECTION_CONTAINER,
 
     // LAYOUT
     CONSTRAINT_LAYOUT,
@@ -116,6 +117,9 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         }
         composable(Routes.TOP_APPBAR.name) {
             TopAppBarPage(navController)
+        }
+        composable(Routes.SELECTION_CONTAINER.name) {
+            SelectionContainerPage()
         }
 
         // Layout 页面
