@@ -30,6 +30,8 @@ fun WidgetPage(navController: NavHostController) {
         Routes.TOP_APPBAR.name,
         Routes.TAB_ROW.name,
         Routes.SELECTION_CONTAINER.name,
+        Routes.TRI_STATE_CHECKBOX.name,
+        Routes.SLIDER.name,
     )
 
     LazyColumn {

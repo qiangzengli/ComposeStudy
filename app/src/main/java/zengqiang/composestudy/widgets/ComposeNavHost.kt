@@ -41,6 +41,8 @@ enum class Routes {
     BASIC_TEXT_FIELD,
     TOP_APPBAR,
     SELECTION_CONTAINER,
+    TRI_STATE_CHECKBOX,
+    SLIDER,
 
     // LAYOUT
     CONSTRAINT_LAYOUT,
@@ -127,6 +129,13 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         composable(Routes.SELECTION_CONTAINER.name) {
             SelectionContainerPage()
         }
+        composable(Routes.TRI_STATE_CHECKBOX.name) {
+            TriStateCheckboxPage()
+        }
+        composable(Routes.SLIDER.name) {
+            SliderPage()
+        }
+
 
         // Layout 页面
         composable(Routes.CONSTRAINT_LAYOUT.name) {
