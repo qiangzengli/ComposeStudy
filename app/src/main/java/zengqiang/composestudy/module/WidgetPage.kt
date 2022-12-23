@@ -15,10 +15,12 @@ Desc:
 fun WidgetPage(navController: NavHostController) {
     val data: ArrayList<String> = arrayListOf(
         Routes.TEXT.name,
+        Routes.CLICKABLE_TEXT.name,
         Routes.BUTTON.name,
         Routes.OUTLINE_BUTTON.name,
         Routes.TEXT_BUTTON.name,
         Routes.TEXT_FIELD.name,
+        Routes.BASIC_TEXT_FIELD.name,
         Routes.OUTLINED_TEXT_FIELD.name,
         Routes.ICON.name,
         Routes.IMAGE.name,

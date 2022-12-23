@@ -35,8 +35,10 @@ enum class Routes {
     SWITCH,
     TAB_ROW,
     TEXT,
+    CLICKABLE_TEXT,
     TEXT_BUTTON,
     TEXT_FIELD,
+    BASIC_TEXT_FIELD,
     TOP_APPBAR,
     SELECTION_CONTAINER,
 
@@ -105,6 +107,9 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         composable(Routes.TEXT.name) {
             TextPage()
         }
+        composable(Routes.CLICKABLE_TEXT.name) {
+            ClickableTextPage()
+        }
 
         composable(Routes.TEXT_BUTTON.name) {
             TextButtonPage()
@@ -112,9 +117,10 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         composable(Routes.TEXT_FIELD.name) {
             TextFieldPage()
         }
-        composable(Routes.TEXT.name) {
-            TextPage()
+        composable(Routes.BASIC_TEXT_FIELD.name) {
+            BasicTextFieldPage()
         }
+
         composable(Routes.TOP_APPBAR.name) {
             TopAppBarPage(navController)
         }
