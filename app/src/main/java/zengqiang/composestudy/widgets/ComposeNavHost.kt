@@ -13,6 +13,8 @@ import zengqiang.composestudy.module.animator.AnimatedContentPage
 import zengqiang.composestudy.module.animator.AnimatedVisibilityPage
 import zengqiang.composestudy.module.animator.CrossFadePage
 import zengqiang.composestudy.module.animator.RememberInfiniteTransitionPage
+import zengqiang.composestudy.module.layout.BoxPage
+import zengqiang.composestudy.module.layout.ColumnPage
 import zengqiang.composestudy.module.layout.ConstraintLayoutPage
 import zengqiang.composestudy.module.layout.RowPage
 import zengqiang.composestudy.module.widget.*
@@ -49,7 +51,9 @@ enum class Routes {
 
     // LAYOUT
     CONSTRAINT_LAYOUT,
+    COLUMN,
     ROW,
+    BOX,
 
     // ANIMATORS
     ANIMATED_CONTENT,
@@ -145,7 +149,7 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             AlertDialogPage()
         }
 
-        composable(Routes.PROGRESS_BAR.name){
+        composable(Routes.PROGRESS_BAR.name) {
             ProgressBarPage()
         }
 
@@ -155,8 +159,15 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             ConstraintLayoutPage()
         }
 
+        composable(Routes.COLUMN.name) {
+            ColumnPage()
+        }
+
         composable(Routes.ROW.name) {
             RowPage()
+        }
+        composable(Routes.BOX.name) {
+            BoxPage()
         }
         // Animations 页面
         composable(Routes.ANIMATED_CONTENT.name) {

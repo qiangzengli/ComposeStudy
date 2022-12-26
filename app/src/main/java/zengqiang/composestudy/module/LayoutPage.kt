@@ -13,7 +13,12 @@ Desc:
  */
 @Composable
 fun LayoutPage(navController: NavHostController) {
-    val data = arrayListOf(Routes.CONSTRAINT_LAYOUT.name, Routes.ROW.name);
+    val data = arrayListOf(
+        Routes.COLUMN.name,
+        Routes.CONSTRAINT_LAYOUT.name,
+        Routes.ROW.name,
+        Routes.BOX.name
+    );
 
     LazyColumn {
         items(data.size, itemContent = {
