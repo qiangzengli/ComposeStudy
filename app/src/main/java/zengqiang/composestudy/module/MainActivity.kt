@@ -30,7 +30,9 @@ fun HomePage(navController: NavHostController) {
     val data = listOf(
         Routes.WIDGETS.name,
         Routes.ANIMATION.name,
-        Routes.LAYOUT.name
+        Routes.LAYOUT.name,
+        Routes.SIDE_EFFECTS.name,
+        Routes.CUSTOM_VIEW.name,
     )
     LazyColumn {
         items(data.size, itemContent = {

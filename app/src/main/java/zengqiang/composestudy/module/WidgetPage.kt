@@ -35,6 +35,9 @@ fun WidgetPage(navController: NavHostController) {
         Routes.DIALOG.name,
         Routes.ALERT_DIALOG.name,
         Routes.PROGRESS_BAR.name,
+        Routes.SCAFFOLD.name,
+        Routes.REMEMBER_SAVABLE.name,
+        Routes.VIEW_MODEL.name,
     )
 
     LazyColumn {

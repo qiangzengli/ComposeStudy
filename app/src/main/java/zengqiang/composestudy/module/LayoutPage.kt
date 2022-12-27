@@ -16,6 +16,7 @@ fun LayoutPage(navController: NavHostController) {
     val data = arrayListOf(
         Routes.COLUMN.name,
         Routes.CONSTRAINT_LAYOUT.name,
+        Routes.CONSTRAINT_LAYOUT_2.name,
         Routes.ROW.name,
         Routes.BOX.name
     );

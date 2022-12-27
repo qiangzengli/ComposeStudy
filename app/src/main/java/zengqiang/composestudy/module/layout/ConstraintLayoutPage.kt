@@ -50,6 +50,7 @@ fun ConstraintLayoutPage() {
             })
 
         val (tvName, tvPasswd, tfName, tfPasswd) = createRefs()
+        // Barrier分界线 的使用
         val endBarrier = createEndBarrier(tvName, tvPasswd)
 
         Text(text = "用户名:", modifier = Modifier.constrainAs(tvName) {

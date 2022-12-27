@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 val composeVersion = "1.3.1"
 val navVersion = "2.5.3"
@@ -62,6 +63,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("androidx.activity:activity-ktx:1.6.0")
     implementation("androidx.navigation:navigation-compose:$navVersion")
+    //pager 依赖
+    implementation("com.google.accompanist:accompanist-pager:0.28.0")
 
 
 }
