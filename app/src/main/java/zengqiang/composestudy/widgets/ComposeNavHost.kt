@@ -10,7 +10,7 @@ import zengqiang.composestudy.module.animator.AnimatedContentPage
 import zengqiang.composestudy.module.animator.AnimatedVisibilityPage
 import zengqiang.composestudy.module.animator.CrossFadePage
 import zengqiang.composestudy.module.animator.RememberInfiniteTransitionPage
-import zengqiang.composestudy.module.custom_view.LayoutModifierPage
+import zengqiang.composestudy.module.custom_view.*
 import zengqiang.composestudy.module.layout.*
 import zengqiang.composestudy.module.side_effects.*
 import zengqiang.composestudy.module.widget.*
@@ -19,22 +19,68 @@ import zengqiang.composestudy.module.widget.viewmodel.ViewModelPage
 
 enum class Routes {
     // 根页面
-    HOME, WIDGETS, LAYOUT, ANIMATION, SIDE_EFFECTS, CUSTOM_VIEW,
+    HOME,
+    WIDGETS,
+    LAYOUT,
+    ANIMATION,
+    SIDE_EFFECTS,
+    CUSTOM_VIEW,
 
     // WIDGETS
-    BUTTON, ICON, ICON_TOGGLE_BUTTON, IMAGE, OUTLINE_BUTTON, OUTLINED_TEXT_FIELD, RADIO_BUTTON, SWITCH, TAB_ROW, TEXT, CLICKABLE_TEXT, TEXT_BUTTON, TEXT_FIELD, BASIC_TEXT_FIELD, TOP_APPBAR, SELECTION_CONTAINER, TRI_STATE_CHECKBOX, SLIDER, DIALOG, ALERT_DIALOG, PROGRESS_BAR, SCAFFOLD, REMEMBER_SAVABLE, VIEW_MODEL,
+    BUTTON,
+    ICON,
+    ICON_TOGGLE_BUTTON,
+    IMAGE,
+    OUTLINE_BUTTON,
+    OUTLINED_TEXT_FIELD,
+    RADIO_BUTTON, SWITCH,
+    TAB_ROW,
+    TEXT,
+    CLICKABLE_TEXT,
+    TEXT_BUTTON,
+    TEXT_FIELD,
+    BASIC_TEXT_FIELD,
+    TOP_APPBAR,
+    SELECTION_CONTAINER,
+    TRI_STATE_CHECKBOX,
+    SLIDER,
+    DIALOG,
+    ALERT_DIALOG,
+    PROGRESS_BAR,
+    SCAFFOLD,
+    REMEMBER_SAVABLE,
+    VIEW_MODEL,
 
     // LAYOUT
-    CONSTRAINT_LAYOUT, CONSTRAINT_LAYOUT_2, COLUMN, ROW, BOX,
+    CONSTRAINT_LAYOUT,
+    CONSTRAINT_LAYOUT_2,
+    COLUMN,
+    ROW,
+    BOX,
 
     // ANIMATORS
-    ANIMATED_CONTENT, ANIMATED_VISIBILITY, CROSS_FADE, REMEMBER_INFINITE_TRANSITION,
+    ANIMATED_CONTENT,
+    ANIMATED_VISIBILITY,
+    CROSS_FADE,
+    REMEMBER_INFINITE_TRANSITION,
 
     //SIDE EFFECTS
-    DISPOSABLE_EFFECT, SIDE_EFFECT, LAUNCH_EFFECT, REMEMBER_COROUTINE_SCOPE, REMEMBER_UPDATED_STATE, SNAP_FLOW,
+    DISPOSABLE_EFFECT,
+    SIDE_EFFECT,
+    LAUNCH_EFFECT,
+    REMEMBER_COROUTINE_SCOPE,
+    REMEMBER_UPDATED_STATE,
+    SNAP_FLOW,
 
     //CUSTOM_VIEW
     LAYOUT_MODIFIER,
+    LAYOUT_COMPOSABLE,
+    USE_DEFAULT_INTRINSIC,
+    CUSTOM_INTRINSIC,
+    SUB_COMPOSE_LAYOUT,
+    CANVAS,
+    DRAW_WITH_CONTENT,
+
 
 }
 
@@ -203,6 +249,26 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         composable(Routes.LAYOUT_MODIFIER.name) {
             LayoutModifierPage()
         }
+        composable(Routes.LAYOUT_COMPOSABLE.name) {
+            LayoutComposablePage()
+        }
+        composable(Routes.USE_DEFAULT_INTRINSIC.name) {
+            UseDefaultIntrinsicPage()
+        }
+        composable(Routes.CUSTOM_INTRINSIC.name) {
+            CustomIntrinsicPage()
+        }
+
+        composable(Routes.SUB_COMPOSE_LAYOUT.name) {
+            SubComposeLayoutPage()
+        }
+        composable(Routes.CANVAS.name) {
+            CanvasPage()
+        }
+        composable(Routes.DRAW_WITH_CONTENT.name){
+            DrawWithContentPage()
+        }
+
 
     }
 }

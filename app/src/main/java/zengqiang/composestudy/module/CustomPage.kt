@@ -10,7 +10,13 @@ import zengqiang.composestudy.widgets.Routes
 fun CustomPage(navController: NavHostController) {
     val items = listOf(
         Routes.LAYOUT_MODIFIER.name,
-        )
+        Routes.LAYOUT_COMPOSABLE.name,
+        Routes.USE_DEFAULT_INTRINSIC.name,
+        Routes.CUSTOM_INTRINSIC.name,
+        Routes.SUB_COMPOSE_LAYOUT.name,
+        Routes.CANVAS.name,
+        Routes.DRAW_WITH_CONTENT.name,
+    )
     LazyColumn {
         items(items.size, itemContent = {
             TextItem(msg = items[it]) {
