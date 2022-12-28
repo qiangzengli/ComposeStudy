@@ -1,10 +1,7 @@
 package zengqiang.composestudy.module.custom_view
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -26,7 +23,6 @@ fun DrawWithContentPage() {
         DrawWithContentDemo()
         VGap(space = 20.dp)
         DrawWithBehindDemo()
-
     }
 
 }
@@ -35,21 +31,21 @@ fun DrawWithContentPage() {
 @Composable
 private fun DrawWithContentDemo() {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .height(200.dp)
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center,
     ) {
         Card(shape = RoundedCornerShape(8.dp), modifier = Modifier
             .size(100.dp)
             .drawWithContent {
+                drawContent()
                 drawCircle(
-                    Color.Red,
-                    18.dp.toPx() / 2,
-                    center = Offset(drawContext.size.width, 0f)
+                    Color.Red, 18.dp.toPx() / 2, center = Offset(drawContext.size.width, 0f)
                 )
             }) {
             Image(
-                painter = painterResource(id = R.drawable.conan),
-                contentDescription = null
+                painter = painterResource(id = R.drawable.conan1), contentDescription = null
             )
 
         }
@@ -60,22 +56,19 @@ private fun DrawWithContentDemo() {
 @Composable
 private fun DrawWithBehindDemo() {
     Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-
-        ) {
+        modifier = Modifier
+            .height(200.dp)
+            .fillMaxWidth(), contentAlignment = Alignment.Center
+    ) {
         Card(shape = RoundedCornerShape(8.dp), modifier = Modifier
             .size(100.dp)
             .drawBehind {
                 drawCircle(
-                    Color.Red,
-                    18.dp.toPx() / 2,
-                    center = Offset(drawContext.size.width, 0f)
+                    Color.Red, 18.dp.toPx() / 2, center = Offset(drawContext.size.width, 0f)
                 )
             }) {
             Image(
-                painter = painterResource(id = R.drawable.conan),
-                contentDescription = null
+                painter = painterResource(id = R.drawable.conan1), contentDescription = null
             )
 
         }

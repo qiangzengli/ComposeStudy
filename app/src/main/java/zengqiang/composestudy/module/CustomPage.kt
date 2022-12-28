@@ -16,6 +16,9 @@ fun CustomPage(navController: NavHostController) {
         Routes.SUB_COMPOSE_LAYOUT.name,
         Routes.CANVAS.name,
         Routes.DRAW_WITH_CONTENT.name,
+        Routes.DRAW_WITH_CACHE.name,
+        Routes.NATIVE_CANVAS.name,
+        Routes.WAVE_LOADING.name,
     )
     LazyColumn {
         items(items.size, itemContent = {

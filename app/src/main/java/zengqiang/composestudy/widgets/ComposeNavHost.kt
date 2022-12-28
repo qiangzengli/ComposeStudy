@@ -80,6 +80,9 @@ enum class Routes {
     SUB_COMPOSE_LAYOUT,
     CANVAS,
     DRAW_WITH_CONTENT,
+    DRAW_WITH_CACHE,
+    NATIVE_CANVAS,
+    WAVE_LOADING,
 
 
 }
@@ -265,8 +268,17 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         composable(Routes.CANVAS.name) {
             CanvasPage()
         }
-        composable(Routes.DRAW_WITH_CONTENT.name){
+        composable(Routes.DRAW_WITH_CONTENT.name) {
             DrawWithContentPage()
+        }
+        composable(Routes.DRAW_WITH_CACHE.name) {
+            DrawWithCachePage()
+        }
+        composable(Routes.NATIVE_CANVAS.name) {
+            NativeCanvasPage()
+        }
+        composable(Routes.WAVE_LOADING.name) {
+            WaveLoadingPage()
         }
 
 

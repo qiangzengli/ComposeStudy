@@ -15,18 +15,22 @@ Author:alan
 Desc:
  */
 @Composable
- fun TextItem(msg: String,click:()->Unit) {
+fun TextItem(msg: String, click: () -> Unit) {
     Column {
         Text(
-            text = msg,
-            modifier = Modifier
+            text = msg, modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .padding(10.dp)
                 .clickable(
-                    onClick = click)
+                    onClick = click
+                )
         )
-        Divider(modifier = Modifier.fillMaxWidth().height(1.dp), color = Color.Red)
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5f.dp), color = Color.LightGray
+        )
 
 
     }
