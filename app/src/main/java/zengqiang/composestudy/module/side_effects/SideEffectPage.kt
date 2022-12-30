@@ -20,5 +20,6 @@ fun SideEffectPage() {
         doThingSafely()
     }
     doThingUnSafely()
-    throw java.lang.RuntimeException("oops")
+    // 如果在这里抛出异常，doThingSafely则不会执行，而doThingUnSafely 会执行
+//    throw java.lang.RuntimeException("oops")
 }

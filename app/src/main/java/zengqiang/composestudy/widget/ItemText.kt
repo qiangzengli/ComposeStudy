@@ -21,10 +21,9 @@ fun TextItem(msg: String, click: () -> Unit) {
             text = msg, modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
+                .clickable { click() }
                 .padding(10.dp)
-                .clickable(
-                    onClick = click
-                )
+
         )
         Divider(
             modifier = Modifier

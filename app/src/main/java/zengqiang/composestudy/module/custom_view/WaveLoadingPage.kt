@@ -48,7 +48,7 @@ fun WaveLoadingPage() {
             close()
         }
     }
-    Canvas(modifier=Modifier.fillMaxSize()) {
+    Canvas(modifier = Modifier.fillMaxSize()) {
         drawImage(imageBitmap, colorFilter = run {
             val cm = ColorMatrix().apply { setToSaturation(0f) }
             ColorFilter.colorMatrix(cm)
