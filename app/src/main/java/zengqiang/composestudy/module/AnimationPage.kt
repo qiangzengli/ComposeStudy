@@ -11,6 +11,9 @@ import zengqiang.composestudy.widgets.Routes
 fun AnimationPage(navController: NavHostController) {
     val data = arrayListOf(
         Routes.ANIMATED_VISIBILITY.name,
+        Routes.MUTABLE_TRANSITION_STATE.name,
+        Routes.CUSTOM_ENTER_EXIT.name,
+        Routes.ANIMATE_ENTER_EXIT.name,
         Routes.ANIMATED_CONTENT.name,
         Routes.CROSS_FADE.name,
         Routes.REMEMBER_INFINITE_TRANSITION.name,

@@ -6,10 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import zengqiang.composestudy.module.*
-import zengqiang.composestudy.module.animator.AnimatedContentPage
-import zengqiang.composestudy.module.animator.AnimatedVisibilityPage
-import zengqiang.composestudy.module.animator.CrossFadePage
-import zengqiang.composestudy.module.animator.RememberInfiniteTransitionPage
+import zengqiang.composestudy.module.animator.*
 import zengqiang.composestudy.module.custom_view.*
 import zengqiang.composestudy.module.layout.*
 import zengqiang.composestudy.module.side_effects.*
@@ -59,8 +56,12 @@ enum class Routes {
     BOX,
 
     // ANIMATORS
-    ANIMATED_CONTENT,
+    // 用于监听动画状态
     ANIMATED_VISIBILITY,
+    MUTABLE_TRANSITION_STATE,
+    CUSTOM_ENTER_EXIT,
+    ANIMATE_ENTER_EXIT,
+    ANIMATED_CONTENT,
     CROSS_FADE,
     REMEMBER_INFINITE_TRANSITION,
 
@@ -215,13 +216,22 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             BoxPage()
         }
         // Animations 页面
-        composable(Routes.ANIMATED_CONTENT.name) {
-            AnimatedContentPage()
-        }
         composable(Routes.ANIMATED_VISIBILITY.name) {
             AnimatedVisibilityPage()
         }
+        composable(Routes.MUTABLE_TRANSITION_STATE.name) {
+            MutableTransitionStatePage()
+        }
+        composable(Routes.CUSTOM_ENTER_EXIT.name) {
+            CustomEnterExitPage()
+        }
 
+        composable(Routes.ANIMATE_ENTER_EXIT.name) {
+            AnimateEnterExitPage()
+        }
+        composable(Routes.ANIMATED_CONTENT.name) {
+            AnimatedContentPage()
+        }
         composable(Routes.CROSS_FADE.name) {
             CrossFadePage()
         }
