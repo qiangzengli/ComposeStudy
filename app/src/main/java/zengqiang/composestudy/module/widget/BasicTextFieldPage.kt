@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import zengqiang.composestudy.widget.HDivider
+import zengqiang.composestudy.widgets.HDivider
 
 @Composable
 fun BasicTextFieldPage() {

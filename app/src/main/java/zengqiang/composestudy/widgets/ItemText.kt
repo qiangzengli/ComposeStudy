@@ -1,4 +1,4 @@
-package zengqiang.composestudy.widget
+package zengqiang.composestudy.widgets
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

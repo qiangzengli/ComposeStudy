@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import zengqiang.composestudy.widget.VGap
+import zengqiang.composestudy.widgets.VGap
 
 // AnimatedVisibility 中 content作用域中可以使用animateEnterExit 为单个组件指定动画
 @OptIn(ExperimentalAnimationApi::class)

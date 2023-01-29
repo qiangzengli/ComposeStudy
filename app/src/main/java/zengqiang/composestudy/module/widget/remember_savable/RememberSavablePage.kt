@@ -1,7 +1,6 @@
 package zengqiang.composestudy.module.widget.remember_savable
 
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
@@ -10,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import zengqiang.composestudy.widget.VGap
+import zengqiang.composestudy.widgets.VGap
 
 /**
  *在 Composable中可以通过remember跨越重组，来保存状态信息，但是无法跨越Activity和进程

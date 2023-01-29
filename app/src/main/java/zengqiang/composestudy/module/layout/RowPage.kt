@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import zengqiang.composestudy.widget.VGap
+import zengqiang.composestudy.widgets.VGap
 
 @Composable
 fun RowPage() {

@@ -3,7 +3,7 @@ package zengqiang.composestudy.module
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import zengqiang.composestudy.widget.TextItem
+import zengqiang.composestudy.widgets.TextItem
 import zengqiang.composestudy.widgets.Routes
 
 /**

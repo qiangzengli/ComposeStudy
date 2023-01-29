@@ -7,7 +7,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import zengqiang.composestudy.widget.TextItem
+import zengqiang.composestudy.widgets.BlackWhiteWidget
+import zengqiang.composestudy.widgets.TextItem
 import zengqiang.composestudy.widgets.ComposeNavHost
 import zengqiang.composestudy.widgets.Routes
 
@@ -16,10 +17,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            ComposeNavHost(
-                navController = navController,
-                startDestination = Routes.HOME.name
-            )
+            BlackWhiteWidget(enabled = false) {
+                ComposeNavHost(
+                    navController = navController,
+                    startDestination = Routes.HOME.name
+                )
+            }
+
         }
     }
 

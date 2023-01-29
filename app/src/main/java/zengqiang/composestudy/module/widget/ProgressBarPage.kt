@@ -7,7 +7,7 @@ import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
-import zengqiang.composestudy.widget.VGap
+import zengqiang.composestudy.widgets.VGap
 
 @Composable
 fun ProgressBarPage() {
