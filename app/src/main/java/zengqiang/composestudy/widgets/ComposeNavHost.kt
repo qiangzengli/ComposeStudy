@@ -80,6 +80,7 @@ enum class Routes {
     CUSTOM_INTRINSIC,
     SUB_COMPOSE_LAYOUT,
     CANVAS,
+    CLOCK,
     DRAW_WITH_CONTENT,
     DRAW_WITH_CACHE,
     NATIVE_CANVAS,
@@ -277,6 +278,9 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         }
         composable(Routes.CANVAS.name) {
             CanvasPage()
+        }
+        composable(Routes.CLOCK.name) {
+            ClockPage()
         }
         composable(Routes.DRAW_WITH_CONTENT.name) {
             DrawWithContentPage()
