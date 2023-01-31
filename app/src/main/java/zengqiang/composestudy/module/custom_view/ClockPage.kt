@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.*
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.center
@@ -69,10 +70,11 @@ fun ClockPage() {
             val minute = minuteFormat.format(time).toInt()
             val second = secondFormat.format(time).toInt()
             val milliSecond = milliSecondFormat.format(time).toInt()
-            secondDegree = defaultDegree + second * (360f / 60) + milliSecond / 1000f * 6f
+            secondDegree = defaultDegree + second * (360f / 60)
+//            + milliSecond / 1000f * 6f
             minuteDegree = defaultDegree + minute * (360f / 60) + 6 * secondDegree / 360f
             hourDegree = defaultDegree + hour * (360f / 12) + 30 * (minuteDegree + 90) / 360f
-            delay(10L)
+            delay(1000L)
         }
     }
 
@@ -212,6 +214,7 @@ fun ClockPage() {
                                     fontWeight = if (i % 3 == 0) FontWeight.Bold else FontWeight.Normal,
                                     color = if (i % 3 == 0) Color.Red else Color.Black,
                                     fontSize = if (i % 3 == 0) 16.sp else 12.sp,
+                                    fontFamily = FontFamily.Cursive
                                 )
                             )
 
