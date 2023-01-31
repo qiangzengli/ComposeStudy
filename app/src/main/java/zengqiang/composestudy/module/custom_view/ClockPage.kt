@@ -9,18 +9,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.text.*
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import java.text.SimpleDateFormat
+import java.util.*
 
+@OptIn(ExperimentalTextApi::class)
 @Preview
 @Composable
 fun ClockPage() {
@@ -38,12 +41,59 @@ fun ClockPage() {
     var time by remember {
         mutableStateOf(System.currentTimeMillis())
     }
-
-    LaunchedEffect(key1 = time) {
-        time = System.currentTimeMillis()
+    val defaultDegree = -90f
+    var hourDegree by remember {
+        mutableStateOf(defaultDegree)
     }
+    var minuteDegree by remember {
+        mutableStateOf(defaultDegree)
+    }
+    var secondDegree by remember {
+        mutableStateOf(defaultDegree)
+    }
+    val textMeasurer = rememberTextMeasurer()
+    val hourFormat = SimpleDateFormat("HH", Locale.CHINA)
+    val minuteFormat = SimpleDateFormat("mm", Locale.CHINA)
+    val secondFormat = SimpleDateFormat("ss", Locale.CHINA)
+    val milliSecondFormat = SimpleDateFormat("SSS", Locale.CHINA)
+    // 循环更新时间
+    LaunchedEffect(key1 = Unit) {
+        repeat(Int.MAX_VALUE) {
+            time = System.currentTimeMillis()
+            val hour = hourFormat.format(time).toInt()
+            val minute = minuteFormat.format(time).toInt()
+            val second = secondFormat.format(time).toInt()
+            val milliSecond = milliSecondFormat.format(time).toInt()
+            secondDegree = defaultDegree + second * (360f / 60) + milliSecond / 1000f * 6f
+            minuteDegree = defaultDegree + minute * (360f / 60) + 6 * secondDegree / 360f
+            hourDegree = defaultDegree + hour * (360f / 12) + 30 * (minuteDegree + 90) / 360f
+            delay(10L)
+        }
+    }
+
+
+    // 手势代码
+//    var scale by remember { mutableStateOf(1f) }
+//    var rotation by remember { mutableStateOf(0f) }
+//    var offset by remember { mutableStateOf(Offset.Zero) }
+//    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
+//        scale *= zoomChange
+//        rotation += rotationChange
+//        offset += offsetChange
+//    }
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+//         手势代码
+//            .graphicsLayer(
+//                scaleX = scale,
+//                scaleY = scale,
+////                rotationZ = rotation,
+//                translationX = offset.x,
+//                translationY = offset.y
+//            )
+//            .transformable(state = state)
+        ,
         contentAlignment = Alignment.Center
     ) {
 
@@ -59,7 +109,7 @@ fun ClockPage() {
                     center.copy(y = 1f),
                 )
             )
-            // 绘制渐变，增加
+            // 绘制渐变
             drawCircle(
                 brush = Brush.radialGradient(
                     colorStops = arrayOf(
@@ -92,48 +142,28 @@ fun ClockPage() {
                             end = Offset(dialRadius, 0f),
                             strokeWidth = if (i % 5 == 0) 2.dp.toPx() else 1.dp.toPx()
                         )
-
                     }
 
                 }
-
             }
 
+            //绘制中央圆点
             drawCircle(Color.Black, radius = 5f.dp.toPx())
             drawCircle(Color.Black.copy(alpha = 0.1f), radius = 5f * 2.dp.toPx())
 
             // 绘制时针
-            val hourPath = Path().apply {
-                this.fillType = PathFillType.NonZero
-            }
-            hourPath.moveTo(-hourStrokeHalfWidth.toPx(), -hourStrokeHalfWidth.toPx())
-            hourPath.lineTo(hourLength.toPx(), -hourStrokeHalfWidth.toPx())
-            hourPath.lineTo(hourLength.toPx(), hourStrokeHalfWidth.toPx())
-            hourPath.lineTo(-hourStrokeHalfWidth.toPx(), hourStrokeHalfWidth.toPx())
-            hourPath.moveTo(hourLength.toPx(), 0f)
-            hourPath.addArc(
-                Rect(
-                    hourLength.toPx(),
-                    -10.dp.toPx(),
-                    hourLength.toPx() + 20.dp.toPx(),
-                    10.dp.toPx()
-                ),
-                startAngleDegrees = 135f,
-                sweepAngleDegrees = 90f,
-            )
-            hourPath.moveTo(hourLength.toPx() + 2.6.dp.toPx(), -6.8.dp.toPx())
-            hourPath.lineTo(hourLength.toPx() + 2.6.dp.toPx(), 6.8.dp.toPx())
-            hourPath.lineTo(hourLength.toPx() + 10.dp.toPx() + 10.dp.toPx(), 0f)
-            hourPath.close()
-            rotate(180f) {
-
+            rotate(hourDegree) {
                 translate(radius.toPx(), radius.toPx()) {
-
-                    drawPath(hourPath, Color.Black)
+                    drawRoundRect(
+                        Color.Black,
+                        topLeft = Offset(-hourStrokeHalfWidth.toPx(), -hourStrokeHalfWidth.toPx()),
+                        size = Size(hourLength.toPx(), hourStrokeHalfWidth.toPx() * 2),
+                        cornerRadius = CornerRadius(10.dp.toPx(), 10.dp.toPx())
+                    )
                 }
             }
-
-            rotate(90f) {
+            // 绘制分针
+            rotate(minuteDegree) {
                 translate(radius.toPx(), radius.toPx()) {
                     drawRoundRect(
                         Color.Black,
@@ -146,22 +176,45 @@ fun ClockPage() {
                     )
                 }
             }
-
             drawCircle(Color.Red, radius = 3f.dp.toPx())
-            rotate(270f) {
+            rotate(secondDegree) {
                 translate(radius.toPx(), radius.toPx()) {
                     drawLine(
                         color = Color.Red,
                         start = Offset(-10.dp.toPx(), 0f),
                         end = Offset(secondLength.toPx(), 0f),
-                        strokeWidth = secondStrokeHalfWidth.toPx() * 2
+                        strokeWidth = secondStrokeHalfWidth.toPx()
                     )
                 }
             }
 
 
-        }
+            // 绘制数字
+            for (i in 1..12) {
+                val text = buildAnnotatedString {
+                    append(i.toString())
+                }
+                val rect = textMeasurer.measure(text).size
+                rotate(defaultDegree + 30f * i) {
+                    translate(radius.toPx(), radius.toPx()) {
+                        rotate(
+                            90 - 30f * i,
+                            pivot = Offset(dialRadius - 25.dp.toPx() + rect.center.x, 0f)
+                        ) {
+                            drawText(
+                                textMeasurer,
+                                text = i.toString(),
+                                topLeft = Offset(dialRadius - 25.dp.toPx(), -rect.height / 2f),
+                            )
 
+                        }
+
+                    }
+                }
+            }
+
+
+        }
 
     }
 
