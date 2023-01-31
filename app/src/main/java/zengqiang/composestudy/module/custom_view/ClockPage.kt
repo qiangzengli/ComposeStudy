@@ -1,6 +1,8 @@
 package zengqiang.composestudy.module.custom_view
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -15,10 +17,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.*
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
@@ -73,30 +78,28 @@ fun ClockPage() {
 
 
     // 手势代码
-//    var scale by remember { mutableStateOf(1f) }
-//    var rotation by remember { mutableStateOf(0f) }
-//    var offset by remember { mutableStateOf(Offset.Zero) }
-//    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
-//        scale *= zoomChange
-//        rotation += rotationChange
-//        offset += offsetChange
-//    }
+    var scale by remember { mutableStateOf(1f) }
+    var rotation by remember { mutableStateOf(0f) }
+    var offset by remember { mutableStateOf(Offset.Zero) }
+    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
+        scale *= zoomChange
+        rotation += rotationChange
+        offset += offsetChange
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
 //         手势代码
-//            .graphicsLayer(
-//                scaleX = scale,
-//                scaleY = scale,
-////                rotationZ = rotation,
+            .graphicsLayer(
+                scaleX = scale,
+                scaleY = scale,
+//                rotationZ = rotation,
 //                translationX = offset.x,
 //                translationY = offset.y
-//            )
-//            .transformable(state = state)
-        ,
+            )
+            .transformable(state = state),
         contentAlignment = Alignment.Center
     ) {
-
         Canvas(
             modifier = Modifier
                 .size(radius * 2)
@@ -205,6 +208,11 @@ fun ClockPage() {
                                 textMeasurer,
                                 text = i.toString(),
                                 topLeft = Offset(dialRadius - 25.dp.toPx(), -rect.height / 2f),
+                                style = TextStyle(
+                                    fontWeight = if (i % 3 == 0) FontWeight.Bold else FontWeight.Normal,
+                                    color = if (i % 3 == 0) Color.Red else Color.Black,
+                                    fontSize = if (i % 3 == 0) 16.sp else 12.sp,
+                                )
                             )
 
                         }
