@@ -70,11 +70,10 @@ fun ClockPage() {
             val minute = minuteFormat.format(time).toInt()
             val second = secondFormat.format(time).toInt()
             val milliSecond = milliSecondFormat.format(time).toInt()
-            secondDegree = defaultDegree + second * (360f / 60)
-//            + milliSecond / 1000f * 6f
+            secondDegree = defaultDegree + second * (360f / 60)+ milliSecond / 1000f * 6f
             minuteDegree = defaultDegree + minute * (360f / 60) + 6 * secondDegree / 360f
             hourDegree = defaultDegree + hour * (360f / 12) + 30 * (minuteDegree + 90) / 360f
-            delay(1000L)
+            delay(10L)
         }
     }
 
