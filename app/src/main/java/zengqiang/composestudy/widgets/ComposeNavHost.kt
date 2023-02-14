@@ -81,6 +81,7 @@ enum class Routes {
     SUB_COMPOSE_LAYOUT,
     CANVAS,
     CLOCK,
+    WHHEEL,
     DRAW_WITH_CONTENT,
     DRAW_WITH_CACHE,
     NATIVE_CANVAS,
@@ -281,6 +282,9 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         }
         composable(Routes.CLOCK.name) {
             ClockPage()
+        }
+        composable(Routes.WHHEEL.name) {
+            WheelWidgetPage()
         }
         composable(Routes.DRAW_WITH_CONTENT.name) {
             DrawWithContentPage()

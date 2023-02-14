@@ -16,6 +16,7 @@ fun CustomPage(navController: NavHostController) {
         Routes.SUB_COMPOSE_LAYOUT.name,
         Routes.CANVAS.name,
         Routes.CLOCK.name,
+        Routes.WHHEEL.name,
         Routes.DRAW_WITH_CONTENT.name,
         Routes.DRAW_WITH_CACHE.name,
         Routes.NATIVE_CANVAS.name,
