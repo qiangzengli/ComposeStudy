@@ -1,5 +1,7 @@
 package zengqiang.composestudy.module.custom_view
 
+import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -7,10 +9,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +17,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -28,20 +28,41 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
+@OptIn(ExperimentalMaterialApi::class)
 @Preview
 @Composable
 fun WheelWidgetPage() {
     var num by remember {
         mutableStateOf(0)
     }
+    val context = LocalContext.current
+    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val coroutineScope = rememberCoroutineScope()
+    Button(onClick = {
+        coroutineScope.launch {
+            sheetState.show()//显示弹窗
+        }
+    }) {
+        Text("选择工厂")
+    }
 
-    Box(contentAlignment = Alignment.Center) {
-        NumberPicker(
-            modifier = Modifier.fillMaxWidth(),
-            value = num,
-            range = 0..100
-        ) {
-            num = it
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetContent = {
+            Box(contentAlignment = Alignment.Center) {
+                NumberPicker(
+                    modifier = Modifier.fillMaxWidth(), value = num, range = 0..100
+                ) {
+                    num = it
+                    Toast.makeText(context, num.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }) {
+//处理后退事件，显示和隐藏必须用协程执行
+        BackHandler(sheetState.isVisible) {
+            coroutineScope.launch {
+                sheetState.hide()
+            }
         }
     }
 
@@ -72,10 +93,7 @@ fun NumberPicker(
 }
 
 private fun <T> getItemIndexForOffset(
-    range: List<T>,
-    value: T,
-    offset: Float,
-    halfNumbersColumnHeightPx: Float
+    range: List<T>, value: T, offset: Float, halfNumbersColumnHeightPx: Float
 ): Int {
     val indexOf = range.indexOf(value) - (offset / halfNumbersColumnHeightPx).toInt()
     return maxOf(0, minOf(indexOf, range.count() - 1))
@@ -99,15 +117,13 @@ fun <T> ListItemPicker(
 
     val coroutineScope = rememberCoroutineScope()
 
-    val animatedOffset = remember { Animatable(0f) }
-        .apply {
-            val index = list.indexOf(value)
-            val offsetRange = remember(value, list) {
-                -((list.count() - 1) - index) * halfNumbersColumnHeightPx to
-                        index * halfNumbersColumnHeightPx
-            }
-            updateBounds(offsetRange.first, offsetRange.second)
+    val animatedOffset = remember { Animatable(0f) }.apply {
+        val index = list.indexOf(value)
+        val offsetRange = remember(value, list) {
+            -((list.count() - 1) - index) * halfNumbersColumnHeightPx to index * halfNumbersColumnHeightPx
         }
+        updateBounds(offsetRange.first, offsetRange.second)
+    }
 
     val coercedAnimatedOffset = animatedOffset.value % halfNumbersColumnHeightPx
 
@@ -124,47 +140,40 @@ fun <T> ListItemPicker(
                     .height(2.dp)
                     .background(color = dividersColor)
             )
-            Box(
-                modifier = Modifier
-                    .padding(vertical = verticalMargin, horizontal = 20.dp)
-                    .offset { IntOffset(x = 0, y = coercedAnimatedOffset.roundToInt()) }
-            ) {
+            Box(modifier = Modifier
+                .padding(vertical = verticalMargin, horizontal = 20.dp)
+                .offset { IntOffset(x = 0, y = coercedAnimatedOffset.roundToInt()) }) {
                 val baseLabelModifier = Modifier.align(Alignment.Center)
                 ProvideTextStyle(textStyle) {
-                    if (indexOfElement > 0)
-                        Label(
-                            text = label(list.elementAt(indexOfElement - 1)),
-                            modifier = baseLabelModifier
-                                .offset(y = -halfNumbersColumnHeight)
-                                .alpha(
-                                    maxOf(
-                                        minimumAlpha,
-                                        coercedAnimatedOffset / halfNumbersColumnHeightPx
-                                    )
-                                )
-                        )
-                    Label(
-                        text = label(list.elementAt(indexOfElement)),
+                    if (indexOfElement > 0) Label(
+                        text = label(list.elementAt(indexOfElement - 1)),
                         modifier = baseLabelModifier
+                            .offset(y = -halfNumbersColumnHeight)
                             .alpha(
-                                (maxOf(
-                                    minimumAlpha,
-                                    1 - abs(coercedAnimatedOffset) / halfNumbersColumnHeightPx
-                                ))
+                                maxOf(
+                                    minimumAlpha, coercedAnimatedOffset / halfNumbersColumnHeightPx
+                                )
                             )
                     )
-                    if (indexOfElement < list.count() - 1)
-                        Label(
-                            text = label(list.elementAt(indexOfElement + 1)),
-                            modifier = baseLabelModifier
-                                .offset(y = halfNumbersColumnHeight)
-                                .alpha(
-                                    maxOf(
-                                        minimumAlpha,
-                                        -coercedAnimatedOffset / halfNumbersColumnHeightPx
-                                    )
-                                )
+                    Label(
+                        text = label(list.elementAt(indexOfElement)),
+                        modifier = baseLabelModifier.alpha(
+                            (maxOf(
+                                minimumAlpha,
+                                1 - abs(coercedAnimatedOffset) / halfNumbersColumnHeightPx
+                            ))
                         )
+                    )
+                    if (indexOfElement < list.count() - 1) Label(
+                        text = label(list.elementAt(indexOfElement + 1)),
+                        modifier = baseLabelModifier
+                            .offset(y = halfNumbersColumnHeight)
+                            .alpha(
+                                maxOf(
+                                    minimumAlpha, -coercedAnimatedOffset / halfNumbersColumnHeightPx
+                                )
+                            )
+                    )
                 }
             }
             Box(
@@ -175,8 +184,7 @@ fun <T> ListItemPicker(
             )
         },
         modifier = modifier
-            .draggable(
-                orientation = Orientation.Vertical,
+            .draggable(orientation = Orientation.Vertical,
                 state = rememberDraggableState { deltaY ->
                     coroutineScope.launch {
                         animatedOffset.snapTo(animatedOffset.value + deltaY)
@@ -184,24 +192,19 @@ fun <T> ListItemPicker(
                 },
                 onDragStopped = { velocity ->
                     coroutineScope.launch {
-                        val endValue = animatedOffset.fling(
-                            initialVelocity = velocity,
+                        val endValue = animatedOffset.fling(initialVelocity = velocity,
                             animationSpec = exponentialDecay(frictionMultiplier = 20f),
                             adjustTarget = { target ->
                                 val coercedTarget = target % halfNumbersColumnHeightPx
-                                val coercedAnchors =
-                                    listOf(
-                                        -halfNumbersColumnHeightPx,
-                                        0f,
-                                        halfNumbersColumnHeightPx
-                                    )
+                                val coercedAnchors = listOf(
+                                    -halfNumbersColumnHeightPx, 0f, halfNumbersColumnHeightPx
+                                )
                                 val coercedPoint =
                                     coercedAnchors.minByOrNull { abs(it - coercedTarget) }!!
                                 val base =
                                     halfNumbersColumnHeightPx * (target / halfNumbersColumnHeightPx).toInt()
                                 coercedPoint + base
-                            }
-                        ).endState.value
+                            }).endState.value
 
                         val result = list.elementAt(
                             getItemIndexForOffset(list, value, endValue, halfNumbersColumnHeightPx)
@@ -209,8 +212,7 @@ fun <T> ListItemPicker(
                         onValueChange(result)
                         animatedOffset.snapTo(0f)
                     }
-                }
-            )
+                })
             .padding(vertical = numbersColumnHeight / 3 + verticalMargin * 2)
     ) { measurables, constraints ->
         // Don't constrain child views further, measure them with given constraints
@@ -220,18 +222,12 @@ fun <T> ListItemPicker(
             measurable.measure(constraints)
         }
 
-        dividersWidth = placeables
-            .drop(1)
-            .first()
-            .width
-            .toDp()
+        dividersWidth = placeables.drop(1).first().width.toDp()
 
         // Set the size of the layout as big as it can
-        layout(dividersWidth.toPx().toInt(), placeables
-            .sumOf {
-                it.height
-            }
-        ) {
+        layout(dividersWidth.toPx().toInt(), placeables.sumOf {
+            it.height
+        }) {
             // Track the y co-ord we have placed children up to
             var yPosition = 0
 
@@ -271,9 +267,7 @@ private suspend fun Animatable<Float, AnimationVector1D>.fling(
     val adjustedTarget = adjustTarget?.invoke(targetValue)
     return if (adjustedTarget != null) {
         animateTo(
-            targetValue = adjustedTarget,
-            initialVelocity = initialVelocity,
-            block = block
+            targetValue = adjustedTarget, initialVelocity = initialVelocity, block = block
         )
     } else {
         animateDecay(
