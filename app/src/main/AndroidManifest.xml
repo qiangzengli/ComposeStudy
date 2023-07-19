@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="zengqiang.composestudy">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ComposeStudy">
+        android:theme="@style/Theme.ComposeStudy"
+        tools:targetApi="n">
         <activity
             android:name=".module.MainActivity"
             android:exported="true"
@@ -18,26 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.widget.TextActivity" />
-        <activity android:name=".module.WidgetPage" />
-        <activity android:name=".module.widget.ButtonActivity" />
-        <activity android:name=".module.widget.OutLineButtonActivity" />
-        <activity android:name=".module.widget.TextButtonActivity" />
-        <activity android:name=".module.widget.TextFieldPage" />
-        <activity android:name=".module.widget.OutlinedTextFieldActivity" />
-        <activity android:name=".module.widget.IconActivity" />
-        <activity android:name=".module.widget.ImageActivity" />
-        <activity android:name=".module.widget.IconToggleButtonActivity" />
-        <activity android:name=".module.widget.SwitchActivity" />
-        <activity android:name=".module.widget.RadioButtonActivity" />
-        <activity android:name=".module.widget.TopAppBarActivity" />
-        <activity android:name=".module.widget.TabRowActivity" />
-        <activity android:name=".module.LayoutPage" />
-        <activity android:name=".module.layout.ConstraintLayoutActivity" />
-        <activity android:name=".module.layout.RowActivity" />
-        <activity android:name=".module.AnimationPage" />
-        <activity android:name=".module.animator.AnimatedVisibilityActivity" />
-        <activity android:name=".module.animator.AnimatedContentActivity" />
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import zengqiang.composestudy.module.animator.*
 import zengqiang.composestudy.module.custom_view.*
 import zengqiang.composestudy.module.layout.*
 import zengqiang.composestudy.module.side_effects.*
+import zengqiang.composestudy.module.sql.SqlLitePage
 import zengqiang.composestudy.module.widget.*
 import zengqiang.composestudy.module.widget.remember_savable.RememberSavablePage
 import zengqiang.composestudy.module.widget.viewmodel.ViewModelPage
@@ -86,6 +87,8 @@ enum class Routes {
     DRAW_WITH_CACHE,
     NATIVE_CANVAS,
     WAVE_LOADING,
+    WEB_VIEW,
+    SQL_LITE,
 
 
 }
@@ -299,6 +302,12 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             WaveLoadingPage()
         }
 
+        composable(Routes.WEB_VIEW.name) {
+            WebInteractPage(navController)
+        }
+        composable(Routes.SQL_LITE.name) {
+            SqlLitePage(navController)
+        }
 
     }
 }

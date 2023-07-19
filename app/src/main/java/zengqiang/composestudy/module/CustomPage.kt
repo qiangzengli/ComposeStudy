@@ -3,8 +3,8 @@ package zengqiang.composestudy.module
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import zengqiang.composestudy.widgets.TextItem
 import zengqiang.composestudy.widgets.Routes
+import zengqiang.composestudy.widgets.TextItem
 
 @Composable
 fun CustomPage(navController: NavHostController) {
@@ -21,6 +21,8 @@ fun CustomPage(navController: NavHostController) {
         Routes.DRAW_WITH_CACHE.name,
         Routes.NATIVE_CANVAS.name,
         Routes.WAVE_LOADING.name,
+        Routes.WEB_VIEW.name,
+        Routes.SQL_LITE.name
     )
     LazyColumn {
         items(items.size, itemContent = {
