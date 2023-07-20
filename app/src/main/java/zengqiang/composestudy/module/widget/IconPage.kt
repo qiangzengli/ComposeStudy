@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 
 /**
 Time: 2021-01-30 下午7:33
@@ -20,8 +19,8 @@ Author:alan
 Desc:
  */
 @Composable
-fun IconPage(navController: NavHostController) {
-    LazyColumn() {
+fun IconPage() {
+    LazyColumn {
         items(100) {
             Item()
         }

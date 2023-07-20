@@ -64,7 +64,6 @@ onTextLayout: (TextLayoutResult) -> Unit = {}
 style: TextStyle = AmbientTextStyle.current
 文本的样式配置，例如颜色，字体，行高等。也就是说上面属性中的color,fontSize等一些属性也可以在这里进行声明。具体包含的属性可以参考TextStyle类。
  */
-@OptIn(ExperimentalTextApi::class)
 @Composable
 fun TextPage() {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {

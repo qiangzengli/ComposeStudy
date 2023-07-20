@@ -22,7 +22,7 @@ Desc:
 fun RadioButtonPage() {
     val tags = arrayListOf("Java", "Kotlin", "Swift", "PHP", "JavaScript", "Objective-C")
     val state = remember { mutableStateOf("Null") }
-    Row() {
+    Row {
         tags.forEach {
             Row(modifier = Modifier.clickable(onClick = {
                 state.value = it

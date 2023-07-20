@@ -267,7 +267,9 @@ private suspend fun Animatable<Float, AnimationVector1D>.fling(
     val adjustedTarget = adjustTarget?.invoke(targetValue)
     return if (adjustedTarget != null) {
         animateTo(
-            targetValue = adjustedTarget, initialVelocity = initialVelocity, block = block
+            targetValue = adjustedTarget,
+            initialVelocity = initialVelocity,
+            block = block,
         )
     } else {
         animateDecay(

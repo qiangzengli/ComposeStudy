@@ -44,12 +44,12 @@ fun SubComposeRow(
 ) {
     SubcomposeLayout(modifier = modifier) { constraints ->
         var maxHeight = 0
-        var placeables = subcompose("text", text).map {
-            var placeable = it.measure(constraints)
+        val placeables = subcompose("text", text).map {
+            val placeable = it.measure(constraints)
             maxHeight = placeable.height.coerceAtLeast(maxHeight)
             placeable
         }
-        var dividerPlaceable = subcompose("divider") {
+        val dividerPlaceable = subcompose("divider") {
             divider(maxHeight)
         }.map {
             it.measure(constraints.copy(minWidth = 0))

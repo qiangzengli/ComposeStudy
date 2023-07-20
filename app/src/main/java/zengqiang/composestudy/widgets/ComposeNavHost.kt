@@ -122,7 +122,7 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             ButtonPage(navController = navController)
         }
         composable(Routes.ICON.name) {
-            IconPage(navController = navController)
+            IconPage()
         }
 
         composable(Routes.ICON_TOGGLE_BUTTON.name) {
@@ -306,7 +306,7 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             WebInteractPage(navController)
         }
         composable(Routes.SQL_LITE.name) {
-            SqlLitePage(navController)
+            SqlLitePage()
         }
 
     }

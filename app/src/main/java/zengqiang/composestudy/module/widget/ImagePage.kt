@@ -30,7 +30,7 @@ Desc:
 @ExperimentalFoundationApi
 @Composable
 fun ImagePage(navController: NavHostController) {
-    LazyColumn() {
+    LazyColumn {
         items(10, itemContent = {
             ImageItem()
         })
@@ -68,7 +68,7 @@ fun ImagePage(navController: NavHostController) {
 
 @Composable
 fun ImageItem() {
-    Column() {
+    Column {
         Image(
             painter = painterResource(id = R.drawable.a),
             null,

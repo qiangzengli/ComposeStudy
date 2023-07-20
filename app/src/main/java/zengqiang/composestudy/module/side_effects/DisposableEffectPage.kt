@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 
 @Composable
 fun DisposableEffectPage() {
-    backPressHandler(enabled = false) {
+   BackPressHandler(enabled = false) {
         println("返回键按下")
 
     }
@@ -18,7 +18,7 @@ fun DisposableEffectPage() {
 
 
 @Composable
-fun backPressHandler(enabled: Boolean = true, onBackPressed: () -> Unit) {
+fun BackPressHandler(enabled: Boolean = true, onBackPressed: () -> Unit) {
     val backDispatcher = checkNotNull(LocalOnBackPressedDispatcherOwner.current) {
         "No OnBackPressedDispatcherOwner wes provided"
     }.onBackPressedDispatcher

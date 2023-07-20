@@ -15,13 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun SqlLitePage(navController: NavHostController) {
+fun SqlLitePage() {
 
     val context = LocalContext.current
     lateinit var sqLiteOpenHelper: SQLiteOpenHelper

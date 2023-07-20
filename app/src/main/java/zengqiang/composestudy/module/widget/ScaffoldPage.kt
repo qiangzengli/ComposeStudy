@@ -42,7 +42,7 @@ fun ScaffoldPage(navController: NavHostController) {
             })
         },
         bottomBar = {
-            BottomNavigation() {
+            BottomNavigation {
                 menus.mapIndexed { index, menu ->
                     BottomNavigationItem(
                         selected = (selectIndex == index),

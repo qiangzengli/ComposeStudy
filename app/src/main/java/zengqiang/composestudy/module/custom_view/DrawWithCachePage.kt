@@ -24,14 +24,14 @@ fun DrawWithCachePage() {
 @Composable
 fun DrawConan() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        var transition = rememberInfiniteTransition()
+        val transition = rememberInfiniteTransition()
         val alpha by transition.animateFloat(
             initialValue = 0f, targetValue = 1f, animationSpec = infiniteRepeatable(
                 animation = tween(2000, easing = LinearEasing),
                 repeatMode = RepeatMode.Reverse,
             )
         )
-        var context = LocalContext.current
+        val context = LocalContext.current
         Box(modifier = Modifier
             .fillMaxSize()
             .drawWithCache {

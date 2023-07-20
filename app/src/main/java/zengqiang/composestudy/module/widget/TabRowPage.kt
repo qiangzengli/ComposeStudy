@@ -30,7 +30,7 @@ fun TabRowPage() {
 fun ShowTabRow() {
     val state = remember { mutableStateOf(0) }
     val titles = listOf("生物", "化学", "地理", "物理", "历史")
-    Column() {
+    Column {
         TabRow(selectedTabIndex = state.value,
             backgroundColor = Color.Gray,
             contentColor = Color.Yellow,
@@ -59,7 +59,7 @@ fun ShowTabRow() {
 fun ShowScrollableTabRow() {
     val state = remember { mutableStateOf(0) }
     val titles = listOf("生物", "化学", "地理", "物理", "历史", "这个是随便添加的充数的")
-    Column() {
+    Column {
         ScrollableTabRow(
             selectedTabIndex = state.value,
             backgroundColor = Color.Gray,

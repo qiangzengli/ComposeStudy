@@ -24,8 +24,8 @@ fun WaveLoadingPage() {
         amplitude: Float,// 波浪y轴振幅
         progress: Float,//加载进度
     ): Path {
-        var adjustHeight = min(height * Math.max(0f, 1 - progress), amplitude)
-        var adjustWidth = 2 * width
+        val adjustHeight = min(height * Math.max(0f, 1 - progress), amplitude)
+        val adjustWidth = 2 * width
         val dp = 2f
         return Path().apply {
             reset()

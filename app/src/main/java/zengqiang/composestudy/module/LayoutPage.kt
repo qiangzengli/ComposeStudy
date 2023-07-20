@@ -19,7 +19,7 @@ fun LayoutPage(navController: NavHostController) {
         Routes.CONSTRAINT_LAYOUT_2.name,
         Routes.ROW.name,
         Routes.BOX.name
-    );
+    )
 
     LazyColumn {
         items(data.size, itemContent = {
