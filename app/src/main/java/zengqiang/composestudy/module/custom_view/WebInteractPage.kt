@@ -2,21 +2,19 @@ package zengqiang.composestudy.module.custom_view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
@@ -29,7 +27,7 @@ import androidx.navigation.NavHostController
  *
  */
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SetJavaScriptEnabled")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WebInteractPage(navController: NavHostController) {
@@ -47,12 +45,14 @@ fun WebInteractPage(navController: NavHostController) {
     }
 
 
-    val refreshScope = rememberCoroutineScope()
-    var refreshing by remember { mutableStateOf(false) }
+    val refreshing by remember { mutableStateOf(false) }
 
-    var webView: WebView? by remember {
+    val webView: WebView? by remember {
         mutableStateOf(WebView(context!!).apply {
-
+            settings.apply {
+                // js 支持
+                javaScriptEnabled = true
+            }
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     progress = newProgress.toFloat() / 100f
@@ -60,16 +60,14 @@ fun WebInteractPage(navController: NavHostController) {
                 }
             }
             webViewClient = object : WebViewClient() {
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-//                    isLoading = true
-                    super.onPageStarted(view, url, favicon)
-
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    request?.let { view?.loadUrl(it.url.toString()) }
+                    return true
                 }
 
-                override fun onPageFinished(view: WebView?, url: String?) {
-//                    isLoading = false
-                    super.onPageFinished(view, url)
-                }
             }
             loadUrl("https://www.baidu.com")
         })
@@ -89,13 +87,23 @@ fun WebInteractPage(navController: NavHostController) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .pullRefresh(state)
             ) {
-                AndroidView(factory = { webView!! })
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .pullRefresh(state)
+                ) {
+                    AndroidView(factory = { webView!! })
+                }
                 if (progress != 0f && progress != 1f) LinearProgressIndicator(
                     progress = progress,
                     modifier = Modifier.fillMaxWidth()
+                )
+
+                PullRefreshIndicator(
+                    refreshing = refreshing,
+                    state = state,
+                    Modifier.align(Alignment.TopCenter)
                 )
             }
 
