@@ -27,7 +27,7 @@ fun AnimatedVisibilityPage() {
     }
 
     val density = LocalDensity.current
-    Column() {
+    Column {
         Button(
             onClick = { isFavorite = isFavorite.not() }, modifier = Modifier.wrapContentSize()
         ) {

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun SelectionContainerPage() {
-    SelectionContainer() {
+    SelectionContainer {
         Text(text = "可以选中的文字")
 
     }

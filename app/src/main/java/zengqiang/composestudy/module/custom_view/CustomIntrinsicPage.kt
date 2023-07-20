@@ -80,24 +80,21 @@ fun IntrinsicRow(
             }
 
 //            override fun IntrinsicMeasureScope.maxIntrinsicHeight(
-//                measurables: List<IntrinsicMeasurable>,
+//                measurable: List<IntrinsicMeasurable>,
 //                width: Int
 //            ): Int {
-//                TODO("Not yet implemented")
 //            }
 //
 //            override fun IntrinsicMeasureScope.minIntrinsicWidth(
-//                measurables: List<IntrinsicMeasurable>,
+//                measurable: List<IntrinsicMeasurable>,
 //                height: Int
 //            ): Int {
-//                TODO("Not yet implemented")
 //            }
 //
 //            override fun IntrinsicMeasureScope.maxIntrinsicWidth(
-//                measurables: List<IntrinsicMeasurable>,
+//                measurable: List<IntrinsicMeasurable>,
 //                height: Int
 //            ): Int {
-//                TODO("Not yet implemented")
 //            }
         })
 }

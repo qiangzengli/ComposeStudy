@@ -2,13 +2,10 @@ package zengqiang.composestudy.module.custom_view
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.unit.dp
 import zengqiang.composestudy.R
 import kotlin.math.min
 import kotlin.math.sin

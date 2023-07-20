@@ -1,6 +1,5 @@
 package zengqiang.composestudy.module.animator
 
-import android.graphics.Paint.Align
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -16,7 +14,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
 fun RememberInfiniteTransitionPage() {
-    var infinite = rememberInfiniteTransition()
+    val infinite = rememberInfiniteTransition()
 
     val scale by infinite.animateFloat(
         initialValue = 0.1f,
