@@ -8,9 +8,10 @@ import androidx.navigation.compose.composable
 import zengqiang.composestudy.module.*
 import zengqiang.composestudy.module.animator.*
 import zengqiang.composestudy.module.custom_view.*
+import zengqiang.composestudy.module.custom_view.sql.SqlLitePage
+import zengqiang.composestudy.module.function_test.AndroidTTSPage
 import zengqiang.composestudy.module.layout.*
 import zengqiang.composestudy.module.side_effects.*
-import zengqiang.composestudy.module.sql.SqlLitePage
 import zengqiang.composestudy.module.widget.*
 import zengqiang.composestudy.module.widget.remember_savable.RememberSavablePage
 import zengqiang.composestudy.module.widget.viewmodel.ViewModelPage
@@ -23,6 +24,7 @@ enum class Routes {
     ANIMATION,
     SIDE_EFFECTS,
     CUSTOM_VIEW,
+    FUNCTION_TEST,
 
     // WIDGETS
     BUTTON,
@@ -91,6 +93,9 @@ enum class Routes {
     SQL_LITE,
 
 
+    //FUNCTION_TEST
+    ANDROID_TTS,
+
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -115,6 +120,9 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         }
         composable(Routes.CUSTOM_VIEW.name) {
             CustomPage(navController = navController)
+        }
+        composable(Routes.FUNCTION_TEST.name) {
+            FunctionTestPage(navController = navController)
         }
 
         // Widgets 页面
@@ -309,5 +317,9 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
             SqlLitePage()
         }
 
+        // 功能测试
+        composable(Routes.ANDROID_TTS.name) {
+            AndroidTTSPage(navController)
+        }
     }
 }

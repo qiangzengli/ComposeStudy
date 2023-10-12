@@ -1,4 +1,4 @@
-package zengqiang.composestudy.module.sql
+package zengqiang.composestudy.module.custom_view.sql
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
