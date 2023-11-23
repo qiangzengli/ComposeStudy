@@ -2,10 +2,8 @@ package zengqiang.composestudy.module.ibeacon
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCallback
-import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothProfile
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanFilter
@@ -48,12 +46,13 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import zengqiang.composestudy.ext.bluetoothAdapter
-import zengqiang.composestudy.module.ibeacon.ParseUtil.bytes2Hex
-import zengqiang.composestudy.module.ibeacon.ParseUtil.isBeaconDevice
-import zengqiang.composestudy.module.ibeacon.ParseUtil.parseUUID
-import zengqiang.composestudy.module.ibeacon.ParseUtil.rssi2Distance
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.bytes2Hex
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.isBeaconDevice
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseMajor
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseMinor
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseUUID
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.rssi2Distance
 import zengqiang.composestudy.widgets.VGap
-import java.util.UUID
 
 
 @SuppressLint(
@@ -97,11 +96,10 @@ fun IBeaconPage(navController: NavHostController) {
         beconDataModelList.clear()
         hasAllPermission = hasAllPermission.not().not()
     })
-    val callback = object : ScanCallback() {
+    val scanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
             result?.also {
-                val byteData = it.scanRecord!!.bytes
                 if (it.scanRecord != null) {
                     if (!(beconDataModelList.map { dataModel -> dataModel.device.address }
                             .contains(result.device?.address)) && isBeaconDevice(it.scanRecord!!)) {
@@ -119,73 +117,45 @@ fun IBeaconPage(navController: NavHostController) {
         }
 
     }
+    val connectCallback = object : BluetoothGattCallback() {
+        override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
+            super.onConnectionStateChange(gatt, status, newState)
+            Log.d("IBeacon", newState.toString())
+            connectStatus = newState
+            bluetoothGatt = gatt
 
-    fun connectDevice(bluetoothDevice: BluetoothDevice) {
-        bluetoothDevice.connectGatt(context, false, object : BluetoothGattCallback() {
-            override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
-                super.onConnectionStateChange(gatt, status, newState)
-                Log.d("IBeacon", newState.toString())
-                connectStatus = newState
-                bluetoothGatt = gatt
+        }
 
-            }
+//        override fun onCharacteristicWrite(
+//            gatt: BluetoothGatt?,
+//            characteristic: BluetoothGattCharacteristic?,
+//            status: Int
+//        ) {
+//            super.onCharacteristicWrite(gatt, characteristic, status)
+//            Log.d("IBeacon", characteristic.toString())
+//
+//        }
 
-            override fun onCharacteristicWrite(
-                gatt: BluetoothGatt?,
-                characteristic: BluetoothGattCharacteristic?,
-                status: Int
-            ) {
-                super.onCharacteristicWrite(gatt, characteristic, status)
-                Log.d("IBeacon", characteristic.toString())
-                when (characteristic?.service?.uuid) {
-                    UUID.fromString("00001804-494c-4f4f47-4943-544543480000") -> {
-                    }
+//        override fun onCharacteristicChanged(
+//            gatt: BluetoothGatt,
+//            characteristic: BluetoothGattCharacteristic,
+//            value: ByteArray
+//        ) {
+//            super.onCharacteristicChanged(gatt, characteristic, value)
+//            Log.d("IBeacon", characteristic.toString())
+//        }
 
-                    else -> {
-
-                    }
-                }
-
-            }
-
-            override fun onCharacteristicChanged(
-                gatt: BluetoothGatt,
-                characteristic: BluetoothGattCharacteristic,
-                value: ByteArray
-            ) {
-                super.onCharacteristicChanged(gatt, characteristic, value)
-                Log.d("IBeacon", characteristic.toString())
-                when (characteristic.service.uuid) {
-                    UUID.fromString("00001804-494c-4f4f47-4943-544543480000") -> {
-                    }
-
-                    else -> {
-
-                    }
-                }
-            }
-
-            override fun onCharacteristicRead(
-                gatt: BluetoothGatt,
-                characteristic: BluetoothGattCharacteristic,
-                value: ByteArray,
-                status: Int
-            ) {
-                super.onCharacteristicRead(gatt, characteristic, value, status)
-                Log.d("IBeacon", characteristic.toString())
-                when (characteristic.service.uuid) {
-                    UUID.fromString("00001804-494c-4f4f47-4943-544543480000") -> {
-                    }
-
-                    else -> {
-
-                    }
-                }
-
-            }
-        })
-
+//        override fun onCharacteristicRead(
+//            gatt: BluetoothGatt,
+//            characteristic: BluetoothGattCharacteristic,
+//            value: ByteArray,
+//            status: Int
+//        ) {
+//            super.onCharacteristicRead(gatt, characteristic, value, status)
+//        }
     }
+
+
     Scaffold(
         topBar = {
             TopAppBar {
@@ -196,7 +166,7 @@ fun IBeaconPage(navController: NavHostController) {
                         navController.popBackStack()
                     })
 
-                Text(text = "Ibeacon 设备", modifier = Modifier.weight(1f))
+                Text(text = "IBeacon 设备", modifier = Modifier.weight(1f))
 
                 Text(text = "连接状态:${connectStatus.connectStatus}")
 
@@ -204,54 +174,49 @@ fun IBeaconPage(navController: NavHostController) {
         }
     ) {
         Box {
-
-
             when {
                 cameraPermissionState.allPermissionsGranted -> {
                     hasAllPermission = true
-
-
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
                             .pullRefresh(refreshState)
                     ) {
-                        items(beconDataModelList.size) {
-                            val result = beconDataModelList[it]
-                            if (result.scanRecord != null) {
-                                isBeaconDevice(result.scanRecord)
-                            }
-                            Column(modifier = Modifier
-                                .padding(10.dp)
-                                .clickable {
-                                    connectDevice(bluetoothDevice = result.device)
+                        items(beconDataModelList.size) { index ->
+                            val result = beconDataModelList[index]
+                            result.scanRecord?.let {
+                                // 转换为16进制数据
+                                val hexData = bytes2Hex(it.bytes!!)
+                                // 计算距离
+                                val distance = rssi2Distance(result.rssi)
+                                // 显示布局
+                                Column(modifier = Modifier
+                                    .padding(10.dp)
+                                    .clickable {
+                                        result.device.connectGatt(
+                                            context,
+                                            false,
+                                            connectCallback
+                                        )
+                                    }) {
+                                    Text(text = result.scanRecord.deviceName ?: "未知设备名")
+                                    VGap(space = 5.dp)
+                                    Text(text = result.device.address ?: "未知mac地址")
+                                    VGap(space = 5.dp)
+                                    Text(text = "信号强度：${result.rssi}")
+                                    VGap(space = 5.dp)
+                                    Text("距离：${String.format("%.2f", distance)} m")
+                                    VGap(space = 5.dp)
+                                    Text("UUID:${parseUUID(data = hexData)}")
+                                    VGap(space = 5.dp)
+                                    Text("major:${parseMajor(data = hexData)}")
+                                    VGap(space = 5.dp)
+                                    Text("minor:${parseMinor(data = hexData)}")
 
-                                }) {
-                                Text(text = result.scanRecord?.deviceName ?: "未知设备名")
-                                VGap(space = 5.dp)
-                                Text(text = result.device.address ?: "未知mac地址")
-                                VGap(space = 5.dp)
-                                Text(text = "信号强度：${result.rssi}")
-                                VGap(space = 5.dp)
-                                Text(
-                                    text = "设备距离：${
-                                        String.format(
-                                            "%.2f",
-                                            rssi2Distance(result.rssi)
-                                        )
-                                    } m"
-                                )
-                                VGap(space = 5.dp)
-                                Text(
-                                    text = "UUID:${
-                                        parseUUID(
-                                            bytes2Hex(
-                                                result.scanRecord?.bytes!!
-                                            )
-                                        )
-                                    }"
-                                )
+                                }
                             }
+
+
                         }
                     }
                 }
@@ -271,21 +236,11 @@ fun IBeaconPage(navController: NavHostController) {
                 }
             }
 
-            // TODO:  1. 申请相关权限
-            // TODO: 2. 蓝牙适配器相关
-            //  TODO 3. 封装蓝牙工具类
-            // TODO 4. 扫描指定设备(后续完善)
-            // TODO 5 读取信标数据
             LaunchedEffect(hasAllPermission) {
                 bluetoothLeScanner.startScan(
-                    listOf(
-                        ScanFilter.Builder()
-                            //                .setServiceUuid(ParcelUuid.fromString("00001803-494c-4f4f47-4943-544543480000"))
-                            .build()
-                    ),
-                    ScanSettings.Builder()
-                        .build(),
-                    callback
+                    listOf(ScanFilter.Builder().build()),
+                    ScanSettings.Builder().build(),
+                    scanCallback
                 )
             }
 
@@ -296,11 +251,11 @@ fun IBeaconPage(navController: NavHostController) {
                 modifier = Modifier.align(Alignment.TopCenter)
             )
 
-            DisposableEffect(true) {
+            DisposableEffect(Unit) {
                 onDispose {
-                    bluetoothLeScanner.stopScan(callback)
+                    bluetoothLeScanner.stopScan(scanCallback)
                     bluetoothGatt?.close()
-                    bluetoothGatt=null
+                    bluetoothGatt = null
                 }
             }
         }

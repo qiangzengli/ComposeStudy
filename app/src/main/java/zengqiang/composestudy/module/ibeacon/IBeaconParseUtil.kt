@@ -1,41 +1,36 @@
 package zengqiang.composestudy.module.ibeacon
 
 import android.bluetooth.le.ScanRecord
-import android.util.Log
 import kotlin.math.abs
 import kotlin.math.pow
 
-object ParseUtil {
+object IBeaconParseUtil {
 
     /**
      * 解析UUID
      */
-    fun parseUUID(data: String): String {
-      return data.substring(18, 50)
-
-    }
+    fun parseUUID(data: String) = data.substring(18, 50)
+     fun parseMajor(data: String) = data.substring(50, 54)
+     fun parseMinor(data: String) = data.substring(54, 58)
 
     /**
      * 字节数组转16进制
      */
-
     fun bytes2Hex(src: ByteArray): String {
-
         var result = ""
         src.forEach { byte ->
-            val hv =String.format("%02X", byte)
-                result += hv
-            Log.d("16进制单次数据",hv)
+            result += String.format("%02X", byte)
         }
-        Log.d("16进制数据",result)
-        Log.d("数据长度",result.length.toString())
         return result
     }
+
+    /**
+     * 是否是IBeacon设备
+     */
     fun isBeaconDevice(scanRecord: ScanRecord): Boolean {
         val data = scanRecord.bytes
         var startIndex = 2
         var patternFound = false
-
         while (startIndex <= 5) {
             if (data[startIndex + 2].toInt() and 0xff == 0x02
                 && data[startIndex + 3].toInt() and 0xff == 0x15
@@ -45,9 +40,7 @@ object ParseUtil {
             }
             startIndex = startIndex.inc()
         }
-
         return patternFound
-
     }
 
     /**
@@ -59,9 +52,7 @@ object ParseUtil {
         val s = 59
         // 环境衰减因子
         val f = 2.0
-
         val power = (iRssi - s) / (10 * f)
         return 10.0.pow(power)
-
     }
 }
