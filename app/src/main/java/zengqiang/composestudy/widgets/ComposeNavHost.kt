@@ -10,6 +10,7 @@ import zengqiang.composestudy.module.animator.*
 import zengqiang.composestudy.module.custom_view.*
 import zengqiang.composestudy.module.custom_view.sql.SqlLitePage
 import zengqiang.composestudy.module.function_test.AndroidTTSPage
+import zengqiang.composestudy.module.ibeacon.IBeaconPage
 import zengqiang.composestudy.module.layout.*
 import zengqiang.composestudy.module.side_effects.*
 import zengqiang.composestudy.module.widget.*
@@ -25,6 +26,8 @@ enum class Routes {
     SIDE_EFFECTS,
     CUSTOM_VIEW,
     FUNCTION_TEST,
+    //IBeacon
+    IBEACON,
 
     // WIDGETS
     BUTTON,
@@ -96,6 +99,7 @@ enum class Routes {
     //FUNCTION_TEST
     ANDROID_TTS,
 
+
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -124,6 +128,12 @@ fun ComposeNavHost(navController: NavHostController, startDestination: String) {
         composable(Routes.FUNCTION_TEST.name) {
             FunctionTestPage(navController = navController)
         }
+
+        // IBeacon
+        composable(Routes.IBEACON.name) {
+            IBeaconPage(navController)
+        }
+
 
         // Widgets 页面
         composable(Routes.BUTTON.name) {

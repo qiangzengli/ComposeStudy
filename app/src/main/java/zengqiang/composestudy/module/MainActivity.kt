@@ -37,7 +37,8 @@ fun HomePage(navController: NavHostController) {
         Routes.LAYOUT.name,
         Routes.SIDE_EFFECTS.name,
         Routes.CUSTOM_VIEW.name,
-        Routes.FUNCTION_TEST.name
+        Routes.FUNCTION_TEST.name,
+        Routes.IBEACON.name
     )
     LazyColumn {
         items(data.size, itemContent = {
