@@ -22,6 +22,7 @@ import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -232,5 +233,13 @@ fun AndroidTTSPage(navController: NavHostController) {
         }
 
 //    }
+
+    DisposableEffect(true){
+        onDispose {
+            mTts?.stop()
+            mTts?.shutdown()
+        }
+
+    }
 
 }

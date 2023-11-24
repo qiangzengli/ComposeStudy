@@ -50,6 +50,7 @@ import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.bytes2Hex
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.isBeaconDevice
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseMajor
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseMinor
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseRssi
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseUUID
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.rssi2Distance
 import zengqiang.composestudy.widgets.VGap
@@ -101,15 +102,27 @@ fun IBeaconPage(navController: NavHostController) {
             super.onScanResult(callbackType, result)
             result?.also {
                 if (it.scanRecord != null) {
-                    if (!(beconDataModelList.map { dataModel -> dataModel.device.address }
-                            .contains(result.device?.address)) && isBeaconDevice(it.scanRecord!!)) {
-                        beconDataModelList.add(
-                            IBeaconDataModel(
-                                it.rssi,
-                                it.device,
-                                it.scanRecord,
+                    if (isBeaconDevice(it.scanRecord!!)) {
+
+                        if (!(beconDataModelList.map { dataModel -> dataModel.device.address }
+                                .contains(result.device?.address))) {
+                            beconDataModelList.add(
+                                IBeaconDataModel(
+                                    it.rssi,
+                                    it.device,
+                                    it.scanRecord,
+                                )
                             )
-                        )
+
+                        } else {
+                            beconDataModelList[beconDataModelList.indexOf(beconDataModelList.find { seed -> seed.device.address == it.device.address })] =
+                                IBeaconDataModel(
+                                    it.rssi,
+                                    it.device,
+                                    it.scanRecord,
+                                )
+
+                        }
                     }
                 }
 
@@ -180,15 +193,24 @@ fun IBeaconPage(navController: NavHostController) {
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
-                            .pullRefresh(refreshState)
+                            .pullRefresh(refreshState),
                     ) {
                         items(beconDataModelList.size) { index ->
                             val result = beconDataModelList[index]
                             result.scanRecord?.let {
+//                                // rssi
+//                                val rssi = parseRssi(hexData).toInt(16).toString(10).toInt() - 256
+//                                // 计算距离
+//                                val distance = rssi2Distance(
+//                                    parseRssi(hexData).toInt(16).toString(10).toInt() - 256
+//                                )
                                 // 转换为16进制数据
                                 val hexData = bytes2Hex(it.bytes!!)
                                 // 计算距离
-                                val distance = rssi2Distance(result.rssi)
+                                val distance = rssi2Distance(
+                                    result.rssi,
+                                    parseRssi(hexData).toInt(16).toString(10).toInt() - 256
+                                )
                                 // 显示布局
                                 Column(modifier = Modifier
                                     .padding(10.dp)

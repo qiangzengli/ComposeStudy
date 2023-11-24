@@ -10,8 +10,9 @@ object IBeaconParseUtil {
      * 解析UUID
      */
     fun parseUUID(data: String) = data.substring(18, 50)
-     fun parseMajor(data: String) = data.substring(50, 54)
-     fun parseMinor(data: String) = data.substring(54, 58)
+    fun parseMajor(data: String) = data.substring(50, 54)
+    fun parseMinor(data: String) = data.substring(54, 58)
+    fun parseRssi(data: String) = data.substring(58, 60)
 
     /**
      * 字节数组转16进制
@@ -45,13 +46,15 @@ object IBeaconParseUtil {
 
     /**
      * 根据rssi 计算距离
+     * @param rssi 当前设备rssi
+     * @param rssiValue 发射端和接收端 相隔1m的信号强度
      */
-    fun rssi2Distance(rssi: Int): Double {
+    fun rssi2Distance(rssi: Int, rssiValue: Int): Double {
         val iRssi = abs(rssi)
         // 发射端和接收端 相隔1m的信号强度
-        val s = 59
+        val s = abs(rssiValue)
         // 环境衰减因子
-        val f = 2.0
+        val f = 2.0 * 30
         val power = (iRssi - s) / (10 * f)
         return 10.0.pow(power)
     }
