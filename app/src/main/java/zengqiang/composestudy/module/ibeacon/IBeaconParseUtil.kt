@@ -1,7 +1,6 @@
 package zengqiang.composestudy.module.ibeacon
 
 import android.bluetooth.le.ScanRecord
-import kotlin.math.abs
 import kotlin.math.pow
 
 object IBeaconParseUtil {
@@ -44,18 +43,9 @@ object IBeaconParseUtil {
         return patternFound
     }
 
-    /**
-     * 根据rssi 计算距离
-     * @param rssi 当前设备rssi
-     * @param rssiValue 发射端和接收端 相隔1m的信号强度
-     */
-    fun rssi2Distance(rssi: Int, rssiValue: Int): Double {
-        val iRssi = abs(rssi)
-        // 发射端和接收端 相隔1m的信号强度
-        val s = abs(rssiValue)
-        // 环境衰减因子
-        val f = 2.0 * 30
-        val power = (iRssi - s) / (10 * f)
-        return 10.0.pow(power)
+    fun calculateDistance(rssi: Int, txPower: Int, pathLossExponent: Double = 2.5): Double {
+        // 路径损耗指数模型中的距离计算公式
+        val ratio = (txPower - rssi) / (10 * pathLossExponent)
+        return 10.0.pow(ratio)
     }
 }

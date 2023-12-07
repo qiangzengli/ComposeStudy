@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothGattCallback
 import android.bluetooth.BluetoothProfile
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanFilter
+import android.bluetooth.le.ScanRecord.DATA_TYPE_SERVICE_UUIDS_16_BIT_COMPLETE
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
 import android.os.Build
@@ -47,12 +48,14 @@ import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import zengqiang.composestudy.ext.bluetoothAdapter
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.bytes2Hex
+import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.calculateDistance
+//import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.calculateDistance
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.isBeaconDevice
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseMajor
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseMinor
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseRssi
 import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.parseUUID
-import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.rssi2Distance
+//import zengqiang.composestudy.module.ibeacon.IBeaconParseUtil.rssi2Distance
 import zengqiang.composestudy.widgets.VGap
 
 
@@ -207,9 +210,14 @@ fun IBeaconPage(navController: NavHostController) {
                                 // 转换为16进制数据
                                 val hexData = bytes2Hex(it.bytes!!)
                                 // 计算距离
-                                val distance = rssi2Distance(
+//                                val distance = rssi2Distance(
+//                                    result.rssi,
+////                                    parseRssi(hexData).toInt(16).toString(10).toInt() - 256
+//                                )
+                                val distance = calculateDistance(
                                     result.rssi,
-                                    parseRssi(hexData).toInt(16).toString(10).toInt() - 256
+                                    -60,
+
                                 )
                                 // 显示布局
                                 Column(modifier = Modifier
@@ -260,7 +268,8 @@ fun IBeaconPage(navController: NavHostController) {
 
             LaunchedEffect(hasAllPermission) {
                 bluetoothLeScanner.startScan(
-                    listOf(ScanFilter.Builder().build()),
+                    listOf(ScanFilter.Builder()
+                        .build()),
                     ScanSettings.Builder().build(),
                     scanCallback
                 )

@@ -23,7 +23,14 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        create("releasewm3") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -66,7 +73,7 @@ dependencies {
     //pager 依赖
     implementation("com.google.accompanist:accompanist-pager:0.28.0")
     // 权限申请库
-    implementation ("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
+    implementation("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
 
 
 }
