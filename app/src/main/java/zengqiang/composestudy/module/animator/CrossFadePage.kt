@@ -12,7 +12,7 @@ fun CrossFadePage() {
     var currentPage by remember { mutableStateOf("A") }
 
     // CrossFade 使用
-    Crossfade(targetState = currentPage) {
+    Crossfade(targetState = currentPage, label = "") {
         Text(
             when (it) {
                 "A" -> "Page A"

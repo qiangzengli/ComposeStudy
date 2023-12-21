@@ -18,26 +18,24 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun TestPage() {
     val context = LocalContext.current
-Column {
-    Button(onClick = {
-        val receiver = TestReceiver()
-        val intentFilter = IntentFilter("zengqiang.test")
+    Column {
+        Button(onClick = {
+            val receiver = TestReceiver()
+            val intentFilter = IntentFilter("zengqiang.test")
 
-        context.registerReceiver(receiver, intentFilter)
+            context.registerReceiver(receiver, intentFilter)
 
-    }) {
-        Text("注册广播")
+        }) {
+            Text("注册广播")
 
+        }
+        Button(onClick = {
+            context.sendBroadcast(Intent("zengqiang.test"))
+        }) {
+            Text("发送")
+
+        }
     }
-    Button(onClick = {
-        context.sendBroadcast(Intent("zengqiang.test").apply {
-//            putExtra("data","{'name':'李增强'}")
-        })
-    }) {
-        Text("发送")
-
-    }
-}
 
 
 }

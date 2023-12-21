@@ -90,7 +90,6 @@ fun BiliBiliTextField(
         modifier = modifier
             .padding(horizontal = 10.dp)
             .height(height)
-//            .background(Color.White, CircleShape)
             .border(1.dp, Color.Green, shape = CircleShape)
 
     )

@@ -39,7 +39,6 @@ fun OutlinedTextFieldPage() {
             .fillMaxWidth(),
         label = { Text(text = "标签") },//顶部的提示语
         placeholder = { Text(text = "请输入内容") },//hint提示语
-//            backgroundColor = Color.Yellow,//背景颜色
         visualTransformation = PasswordVisualTransformation(),//输入样式
         leadingIcon = { Icon(Icons.Filled.Lock, null) },//前面的图标
         trailingIcon = {

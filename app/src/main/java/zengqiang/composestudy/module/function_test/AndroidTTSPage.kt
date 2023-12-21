@@ -197,9 +197,8 @@ fun AndroidTTSPage(navController: NavHostController) {
 
 
     LaunchedEffect(Unit) {
-//        withContext(Dispatchers.IO) {
             mTts = TextToSpeech(context) { status ->
-                if (status == TextToSpeech.SUCCESS) {
+                if (status == SUCCESS) {
                     val result = mTts?.setLanguage(Locale.CHINA)
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Toast.makeText(context, "语言不支持", Toast.LENGTH_SHORT).show()
@@ -221,18 +220,10 @@ fun AndroidTTSPage(navController: NavHostController) {
 
 
             speechVoice = mTts?.defaultVoice
-//            Log.d("voice_count",speechVoice?.name)
-//
-//            Log.d("voice_count",(mTts?.voices?.size?:0).toString())
             speechVoiceList = mTts?.voices?.toMutableList() ?: mutableListOf()
             Log.d("voice_count voice", speechVoiceList.toString())
-
-
-//            mTts?.getFeatures()
-//
         }
 
-//    }
 
     DisposableEffect(true){
         onDispose {

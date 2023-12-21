@@ -141,34 +141,6 @@ fun IBeaconPage(navController: NavHostController) {
             bluetoothGatt = gatt
 
         }
-
-//        override fun onCharacteristicWrite(
-//            gatt: BluetoothGatt?,
-//            characteristic: BluetoothGattCharacteristic?,
-//            status: Int
-//        ) {
-//            super.onCharacteristicWrite(gatt, characteristic, status)
-//            Log.d("IBeacon", characteristic.toString())
-//
-//        }
-
-//        override fun onCharacteristicChanged(
-//            gatt: BluetoothGatt,
-//            characteristic: BluetoothGattCharacteristic,
-//            value: ByteArray
-//        ) {
-//            super.onCharacteristicChanged(gatt, characteristic, value)
-//            Log.d("IBeacon", characteristic.toString())
-//        }
-
-//        override fun onCharacteristicRead(
-//            gatt: BluetoothGatt,
-//            characteristic: BluetoothGattCharacteristic,
-//            value: ByteArray,
-//            status: Int
-//        ) {
-//            super.onCharacteristicRead(gatt, characteristic, value, status)
-//        }
     }
 
 
@@ -201,19 +173,8 @@ fun IBeaconPage(navController: NavHostController) {
                         items(beconDataModelList.size) { index ->
                             val result = beconDataModelList[index]
                             result.scanRecord?.let {
-//                                // rssi
-//                                val rssi = parseRssi(hexData).toInt(16).toString(10).toInt() - 256
-//                                // 计算距离
-//                                val distance = rssi2Distance(
-//                                    parseRssi(hexData).toInt(16).toString(10).toInt() - 256
-//                                )
                                 // 转换为16进制数据
                                 val hexData = bytes2Hex(it.bytes!!)
-                                // 计算距离
-//                                val distance = rssi2Distance(
-//                                    result.rssi,
-////                                    parseRssi(hexData).toInt(16).toString(10).toInt() - 256
-//                                )
                                 val distance = calculateDistance(
                                     result.rssi,
                                     -60,

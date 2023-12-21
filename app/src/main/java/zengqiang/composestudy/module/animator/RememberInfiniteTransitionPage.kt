@@ -22,7 +22,7 @@ fun RememberInfiniteTransitionPage() {
         animationSpec = infiniteRepeatable(
             animation = tween(1000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
-        )
+        ), label = ""
     )
     val color by infinite.animateColor(
         initialValue = Color.Red,
@@ -30,7 +30,7 @@ fun RememberInfiniteTransitionPage() {
         animationSpec = infiniteRepeatable(
             animation = tween(1000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
-        )
+        ), label = ""
     )
 
     ConstraintLayout {

@@ -76,7 +76,6 @@ fun ShowScrollableTabRow() {
             tabs = {
                 titles.forEachIndexed { index, title ->
                     Tab(
-//                            icon = { Icon(Icons.Filled.AccountCircle) },
                         content = {
 
                             Row(
@@ -96,7 +95,6 @@ fun ShowScrollableTabRow() {
                             state.value = index
 
                         },
-//                            text = { Text(text = title) }
                     )
 
                 }

@@ -18,17 +18,11 @@ import zengqiang.composestudy.widgets.VGap
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AnimateEnterExitPage() {
-//    val state = remember {
-//        MutableTransitionState(false).apply {
-//            targetState = true
-//        }
-//    }
     var visibility by remember {
         mutableStateOf(false)
     }
     Column(modifier = Modifier.fillMaxSize()) {
         Button(onClick = {
-//            state.targetState = !state.targetState
             visibility = !visibility
         }) {
             Text(text = "改变状态")
@@ -36,7 +30,6 @@ fun AnimateEnterExitPage() {
         VGap(space = 20.dp)
 
         AnimatedVisibility(
-//            visibleState = state,
             visible = visibility,
             enter = fadeIn(),
             exit = fadeOut(),

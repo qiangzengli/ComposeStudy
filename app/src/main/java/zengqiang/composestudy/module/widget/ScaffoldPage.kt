@@ -27,7 +27,7 @@ fun ScaffoldPage(navController: NavHostController) {
         Menu(Icons.Default.Person, "个人"),
     )
     var selectIndex by remember {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()

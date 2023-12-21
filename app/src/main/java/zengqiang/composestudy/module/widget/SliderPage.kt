@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 @Composable
 fun SliderPage() {
     var value by remember {
-        mutableStateOf(0f)
+        mutableFloatStateOf(0f)
     }
     Slider(
         value = value,

@@ -35,13 +35,10 @@ fun WebInteractPage(navController: NavHostController) {
         mutableStateOf(null)
     }
     context = LocalContext.current
-//    var isLoading by remember {
-//        mutableStateOf(false)
-//    }
 
 
     var progress by remember {
-        mutableStateOf(0f)
+        mutableFloatStateOf(0f)
     }
 
 

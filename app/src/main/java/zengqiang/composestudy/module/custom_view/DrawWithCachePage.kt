@@ -24,7 +24,7 @@ fun DrawWithCachePage() {
 @Composable
 fun DrawConan() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        val transition = rememberInfiniteTransition()
+        val transition = rememberInfiniteTransition(label = "")
         val alpha by transition.animateFloat(
             initialValue = 0f, targetValue = 1f, animationSpec = infiniteRepeatable(
                 animation = tween(2000, easing = LinearEasing),
